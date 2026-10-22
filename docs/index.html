@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Φθηνό Πλάνο</title>
+<meta name="description" content="Εβδομαδιαίο πλάνο γευμάτων με τις προσφορές Lidl">
+<meta name="theme-color" content="#0b3d91">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Φθηνό Πλάνο">
+<style>
+:root {
+  --bg: #f4f6fb; --surface: #ffffff; --text: #1f2a37; --muted: #6b7a90; --line: #e3e8f0;
+  --primary: #0b3d91; --primary-2: #1f6fd1; --accent: #ffd43b; --accent-text: #4a3700;
+  --cook-bg: #fff8d6; --offer-bg: #e3f6ea; --offer-text: #17734a; --est-bg: #eef1f5; --tip: #a3451d;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f141c; --surface: #18202b; --text: #e6ebf2; --muted: #93a1b5; --line: #263142;
+    --primary: #7fb0ff; --primary-2: #3d7be0; --cook-bg: #2b2715; --offer-bg: #143222; --offer-text: #7fdca8;
+    --est-bg: #232c38; --tip: #f0a57c;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; }
+.hero { background: linear-gradient(140deg, #0b3d91, #1f6fd1); color: #fff;
+  padding: calc(env(safe-area-inset-top) + 18px) 16px 16px; border-radius: 0 0 22px 22px; }
+.hero h1 { margin: 0; font-size: 1.45rem; }
+.hero .range { opacity: .9; font-size: .92rem; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+.stat { background: rgba(255,255,255,.15); border-radius: 14px; padding: 8px 12px; }
+.stat b { display: block; font-size: 1.35rem; }
+.stat span { font-size: .78rem; opacity: .9; }
+.stat.accent { background: var(--accent); color: var(--accent-text); }
+.controls { display: grid; gap: 10px; margin-top: 14px; }
+.ctl { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: rgba(255,255,255,.12); border-radius: 14px; padding: 8px 10px 8px 14px; }
+.ctl label { font-size: .9rem; }
+.stepper { display: flex; align-items: center; gap: 4px; }
+.stepper b { min-width: 2ch; text-align: center; font-size: 1.15rem; }
+.hero button { font: inherit; color: #fff; background: rgba(255,255,255,.18); border: 0; border-radius: 10px;
+  min-width: 42px; height: 38px; font-size: 1.05rem; cursor: pointer; }
+.seg { display: flex; gap: 4px; }
+.seg button.on { background: #fff; color: var(--primary-2); font-weight: 700; }
+.status { font-size: .75rem; opacity: .85; margin: 10px 2px 0; }
+.tabs { position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; padding: 10px 16px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); }
+.tabs button { flex: 1; font: inherit; font-size: .9rem; font-weight: 600; padding: 9px 4px; border-radius: 12px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted); cursor: pointer; }
+.tabs button.on { background: var(--primary-2); border-color: var(--primary-2); color: #fff; }
+main { padding: 4px 16px calc(env(safe-area-inset-bottom) + 90px); max-width: 720px; margin: 0 auto; }
+.panel h3 { margin: 18px 0 8px; font-size: 1.05rem; color: var(--primary); }
+.day, .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; margin-bottom: 10px; }
+.day header { display: flex; align-items: center; justify-content: space-between; }
+.day h3 { margin: 0 0 6px; color: var(--text); }
+.day h3 small { color: var(--muted); font-weight: 400; }
+.day.cookday { background: var(--cook-bg); }
+.day dl { display: grid; grid-template-columns: 7.2em 1fr; gap: 4px 8px; margin: 0; font-size: .93rem; }
+.day dt { color: var(--muted); }
+.day dd { margin: 0; }
+.day dd.lunch { font-weight: 700; color: var(--primary); }
+.badge { display: inline-block; font-size: .72rem; font-weight: 700; border-radius: 7px; padding: 2px 7px; }
+.badge.cook { background: var(--accent); color: var(--accent-text); }
+.badge.offer { background: var(--offer-bg); color: var(--offer-text); }
+.badge.est { background: var(--est-bg); color: var(--muted); }
+.card h4 { margin: 0 0 2px; font-size: 1.02rem; }
+.card .meta { color: var(--muted); font-size: .82rem; margin: 0 0 6px; }
+.card ul { margin: 6px 0; padding-left: 18px; font-size: .93rem; }
+.card li b { font-weight: 600; color: var(--muted); }
+.card .how { background: var(--bg); border-radius: 10px; padding: 8px 10px; font-size: .9rem; margin: 6px 0 0; }
+.card .tip { color: var(--tip); font-size: .85rem; margin: 6px 0 0; }
+.card p { margin: 4px 0; }
+.shop .item { display: flex; gap: 10px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 14px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer; }
+.shop input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--primary-2); flex: none; }
+.shop .body { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.shop .row { display: flex; justify-content: space-between; gap: 8px; }
+.shop .cost { font-weight: 700; white-space: nowrap; }
+.shop .sub, .shop .src { font-size: .8rem; color: var(--muted); }
+.shop .item.done { opacity: .5; }
+.shop .item.done b { text-decoration: line-through; }
+.total { text-align: right; font-size: 1.05rem; margin: 14px 2px; }
+.total b { color: var(--primary); font-size: 1.3rem; }
+.fab { position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom) + 16px); z-index: 6;
+  font: inherit; font-weight: 700; border: 0; border-radius: 999px; padding: 13px 20px;
+  background: var(--accent); color: var(--accent-text); box-shadow: 0 6px 18px rgba(0,0,0,.22); cursor: pointer; }
+.note { font-size: .75rem; color: var(--muted); margin-top: 18px; }
+
+/* PDF / εκτύπωση: όλες οι ενότητες μαζί */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  :root { --bg: #fff; --surface: #fff; --text: #1f2a37; --muted: #5d6b80; --line: #dfe5ee; --primary: #0b3d91; --cook-bg: #fff8d6; }
+  body { font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .tabs, .fab, .controls, .status { display: none !important; }
+  .hero { border-radius: 14px; padding: 14px 16px; }
+  .panel { display: block !important; }
+  .panel::before { display: block; font-size: 15px; font-weight: 700; color: var(--primary); margin: 14px 0 6px; }
+  #week::before { content: "Η εβδομάδα"; }
+  #cooking::before { content: "Μαγειρέματα"; }
+  #shop::before { content: "Λίστα αγορών"; }
+  #shop { break-before: page; }
+  #week { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px; }
+  #week::before { grid-column: 1 / -1; }
+  .day, .card, .shop .item { break-inside: avoid; margin-bottom: 6px; padding: 8px 10px; }
+  main { padding: 0; max-width: none; }
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>Φθηνό πλάνο εβδομάδας</h1>
+  <div class="range">Εβδομάδα <span id="range"></span> · με τις προσφορές Lidl</div>
+  <div class="stats">
+    <div class="stat accent"><b id="total">–</b><span>κόστος εβδομάδας</span></div>
+    <div class="stat"><b id="ppd">–</b><span>ανά άτομο / ημέρα</span></div>
+  </div>
+  <div class="controls">
+    <div class="ctl">
+      <label>Άτομα</label>
+      <div class="stepper"><button id="minus" aria-label="Λιγότερα άτομα">−</button><b id="people">2</b><button id="plus" aria-label="Περισσότερα άτομα">+</button></div>
+    </div>
+    <div class="ctl">
+      <label>Μαγειρέματα / εβδομάδα</label>
+      <div class="seg"><button data-sessions="1">1</button><button data-sessions="2">2</button><button data-sessions="3">3</button></div>
+    </div>
+  </div>
+  <p class="status" id="status">Φορτώνω τις προσφορές…</p>
+</div>
+
+<nav class="tabs">
+  <button data-tab="week">Εβδομάδα</button>
+  <button data-tab="cooking">Μαγείρεμα</button>
+  <button data-tab="shop">Λίστα</button>
+</nav>
+
+<main>
+  <div class="panel" id="week"></div>
+  <div class="panel" id="cooking" hidden></div>
+  <div class="panel" id="shop" hidden></div>
+  <p class="note">Τιμές «Προσφορά» από το lidl-hellas.gr. Οι τιμές «Εκτίμηση» είναι κατά προσέγγιση κανονικές τιμές σούπερ μάρκετ. Οι προσφορές ισχύουν συνήθως λίγες μέρες – δες την ημερομηνία.</p>
+</main>
+
+<button class="fab" id="pdf">PDF</button>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
