@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T04:25+00:00",
+ "updated": "2026-10-24T04:21+00:00",
  "offers": [
   {
    "title": "Ορχιδέα",
@@ -102,16 +102,6 @@
    "url": "https://www.lidl-hellas.gr/p/meigma-xiron-karpon-poikilia/p11120893"
   },
   {
-   "title": "FRESHONA Λαχανικά ποικιλία (Εορταστικά λαχανικά)",
-   "price": 2.29,
-   "packaging": "750g",
-   "when": "Στο κατάστημα",
-   "loose": false,
-   "pack_g": 750.0,
-   "price_kg": 3.05,
-   "url": "https://www.lidl-hellas.gr/p/freshona-lacanika-poikilia/p11001356029"
-  },
-  {
    "title": "HARVEST BASKET Πατάτες Duchesse",
    "price": 1.99,
    "packaging": "600g",
@@ -120,16 +110,6 @@
    "pack_g": 600.0,
    "price_kg": 3.32,
    "url": "https://www.lidl-hellas.gr/p/harvest-basket-patates-duchesse/p11030579"
-  },
-  {
-   "title": "DELUXE Εκλεκτή σάλτσα τομάτας για ζυμαρικά ποικιλία",
-   "price": null,
-   "packaging": "",
-   "when": "Στο κατάστημα",
-   "loose": false,
-   "pack_g": null,
-   "price_kg": null,
-   "url": "https://www.lidl-hellas.gr/p/deluxe-eklekti-saltsa-tomatas-gia-zymarika-poikilia/p11029291"
   },
   {
    "title": "Ελιές",
@@ -152,14 +132,14 @@
    "url": "https://www.lidl-hellas.gr/p/deluxe-tyri-parmigiano-reggiano-p-o-p/p11000959"
   },
   {
-   "title": "Σαλάμι αέρος Spianata Rossa ποικιλία",
+   "title": "Dulano Selection Σαλάμι αέρος Spianata Rossa ποικιλία",
    "price": 2.99,
    "packaging": "Κάθε συσκ. 120 g",
    "when": "Στο κατάστημα",
    "loose": false,
    "pack_g": 120.0,
    "price_kg": 24.92,
-   "url": "https://www.lidl-hellas.gr/p/salami-aeros-spianata-rossa-poikilia/p11210006"
+   "url": "https://www.lidl-hellas.gr/p/dulano-selection-salami-aeros-spianata-rossa-poikilia/p11210006"
   },
   {
    "title": "DELUXE Τυρί ποικιλία (Τυρί με μανιτάρια)",
@@ -463,12 +443,12 @@
   },
   {
    "title": "Τυρί πρόβειο ποικιλία",
-   "price": 4.99,
-   "packaging": "170 g",
+   "price": null,
+   "packaging": "",
    "when": "Στο κατάστημα",
    "loose": false,
-   "pack_g": 170.0,
-   "price_kg": 29.35,
+   "pack_g": null,
+   "price_kg": null,
    "url": "https://www.lidl-hellas.gr/p/tyri-proveio-poikilia/p11317261"
   },
   {
@@ -872,14 +852,14 @@
    "url": "https://www.lidl-hellas.gr/p/noma-kalataki-limnoy-p-o-p/p11532811"
   },
   {
-   "title": "NIXE Τόνος καπνιστός (Τόνος καπνιστός με μπούκοβο)",
+   "title": "ERIDANOUS Τόνος καπνιστός (Τόνος καπνιστός με μπούκοβο)",
    "price": 1.89,
    "packaging": "160g",
    "when": "Στο κατάστημα",
    "loose": false,
    "pack_g": 160.0,
    "price_kg": 18.17,
-   "url": "https://www.lidl-hellas.gr/p/nixe-tonos-kapnistos/p11150019003"
+   "url": "https://www.lidl-hellas.gr/p/eridanous-tonos-kapnistos/p11150019003"
   },
   {
    "title": "SONDEY Γκοφρέτα Twin",
@@ -1095,7 +1075,7 @@
    "title": "NIXE Tόνος (Φιλέτα τόνου σε νερό)",
    "price": 2.09,
    "packaging": "3 x 80 g (3 x 56 g)",
-   "when": "μόνο στο κατάστημα από 24.10.",
+   "when": "μόνο στο κατάστημα",
    "loose": false,
    "pack_g": 408.0,
    "price_kg": 12.44,
@@ -1105,7 +1085,7 @@
    "title": "Αγγούρια ελληνικά",
    "price": 0.41,
    "packaging": "Το τεμάχιο",
-   "when": "μόνο στο κατάστημα από 24.10.",
+   "when": "μόνο στο κατάστημα",
    "loose": false,
    "pack_g": null,
    "price_kg": null,
@@ -1115,7 +1095,7 @@
    "title": "Πυρηνέλαιο",
    "price": null,
    "packaging": "",
-   "when": "μόνο στο κατάστημα από 24.10.",
+   "when": "μόνο στο κατάστημα",
    "loose": false,
    "pack_g": null,
    "price_kg": null,
@@ -1125,7 +1105,7 @@
    "title": "SNACK DAY Τσιπς ποικιλία",
    "price": 1.49,
    "packaging": "Κάθε συσκ. 170 g",
-   "when": "μόνο στο κατάστημα από 24.10.",
+   "when": "μόνο στο κατάστημα",
    "loose": false,
    "pack_g": 170.0,
    "price_kg": 8.76,
@@ -1135,7 +1115,7 @@
    "title": "BELBAKE Αμύγδαλα ωμά",
    "price": 1.95,
    "packaging": "200 g",
-   "when": "μόνο στο κατάστημα από 24.10.",
+   "when": "μόνο στο κατάστημα",
    "loose": false,
    "pack_g": 200.0,
    "price_kg": 9.75,
@@ -1183,12 +1163,12 @@
   },
   {
    "title": "Kinder Σοκολάτα",
-   "price": 3.14,
+   "price": 2.98,
    "packaging": "200 g",
    "when": "μόνο στο κατάστημα 22.10. - 28.10.",
    "loose": false,
    "pack_g": 200.0,
-   "price_kg": 15.7,
+   "price_kg": 14.9,
    "url": "https://www.lidl-hellas.gr/p/kinder-sokolata/p11530353"
   },
   {
@@ -1423,12 +1403,12 @@
   },
   {
    "title": "Κέικ Speculoos",
-   "price": 1.99,
-   "packaging": "4 x 45 g",
+   "price": null,
+   "packaging": "",
    "when": "Στο κατάστημα",
    "loose": false,
-   "pack_g": 180.0,
-   "price_kg": 11.06,
+   "pack_g": null,
+   "price_kg": null,
    "url": "https://www.lidl-hellas.gr/p/keik-speculoos/p11365091"
   },
   {
@@ -1532,16 +1512,6 @@
    "url": "https://www.lidl-hellas.gr/p/taste-of-deutschland-pretsel-gia-pisimo/p11005302002"
   },
   {
-   "title": "TASTE OF DEUTSCHLAND Γεμιστοί λουκουμάδες",
-   "price": 2.99,
-   "packaging": "Κάθε συσκ. 9 x 36 g",
-   "when": "μόνο στο κατάστημα 22.10. - 27.10.",
-   "loose": false,
-   "pack_g": 324.0,
-   "price_kg": 9.23,
-   "url": "https://www.lidl-hellas.gr/p/taste-of-deutschland-gemistoi-loykoymades/p11102670"
-  },
-  {
    "title": "TASTE OF DEUTSCHLAND Τάρτα",
    "price": 6.99,
    "packaging": "Κάθε συσκ 1,25 Kg",
@@ -1643,12 +1613,12 @@
   },
   {
    "title": "FERRERO ROCHER® Σοκολατάκια",
-   "price": 9.59,
+   "price": 8.78,
    "packaging": "375 g",
    "when": "μόνο στο κατάστημα 22.10. - 27.10.",
    "loose": false,
    "pack_g": 375.0,
-   "price_kg": 25.57,
+   "price_kg": 25.41,
    "url": "https://www.lidl-hellas.gr/p/ferrero-rocher-sokolatakia/p11531694"
   },
   {
@@ -1663,13 +1633,23 @@
   },
   {
    "title": "Παριζάκι με ελαιόλαδο",
-   "price": 2.19,
+   "price": 2.18,
    "packaging": "310 g",
    "when": "μόνο στο κατάστημα 22.10. - 27.10.",
    "loose": false,
    "pack_g": 310.0,
-   "price_kg": 7.06,
+   "price_kg": 7.03,
    "url": "https://www.lidl-hellas.gr/p/parizaki-me-elaiolado/p11528598"
+  },
+  {
+   "title": "Alfa Τυρόπιτα κοζανίτικη Κιχί με φέτα Π.Ο.Π. & μυζήθρα",
+   "price": 3.9,
+   "packaging": "800 g",
+   "when": "μόνο στο κατάστημα 22.10. - 27.10.",
+   "loose": false,
+   "pack_g": 800.0,
+   "price_kg": 4.88,
+   "url": "https://www.lidl-hellas.gr/p/alfa-tyropita-kozanitiki-kici-me-feta-p-o-p-myzitra/p11528805"
   },
   {
    "title": "Γάλα με κακάο",
@@ -1733,12 +1713,12 @@
   },
   {
    "title": "7DAYS Κρουασάν (Κακάο)",
-   "price": 1.98,
+   "price": 1.79,
    "packaging": "280 g (4 τεμ.)",
    "when": "",
    "loose": false,
    "pack_g": 280.0,
-   "price_kg": 7.07,
+   "price_kg": 6.39,
    "url": "https://www.lidl-hellas.gr/p/7days-kroyasan/p11316810001"
   },
   {
@@ -1890,16 +1870,6 @@
    "pack_g": 102.0,
    "price_kg": 17.55,
    "url": "https://www.lidl-hellas.gr/p/smarties/p11715149001"
-  },
-  {
-   "title": "KONG STRONG Energy drink ποικιλία (Βερίκοκο-Φράουλα)",
-   "price": 0.55,
-   "packaging": "",
-   "when": "μόνο στο κατάστημα 22.10. - 27.10.",
-   "loose": false,
-   "pack_g": null,
-   "price_kg": 2.2,
-   "url": "https://www.lidl-hellas.gr/p/kong-strong-energy-drink-poikilia/p11001776018"
   },
   {
    "title": "KONG STRONG Energy Drink καρπούζι",
@@ -2132,24 +2102,24 @@
    "url": "https://www.lidl-hellas.gr/p/favorina-moysikes-loytrines-figoyres-me-sokolatakia/p11252018"
   },
   {
-   "title": "ERIDANOUS Κουραμπιέδες Ν.Καρβάλης",
+   "title": "Favorina Κουραμπιέδες Ν.Καρβάλης",
    "price": 4.99,
    "packaging": "470 g",
    "when": "Στο κατάστημα",
    "loose": false,
    "pack_g": 470.0,
    "price_kg": 10.62,
-   "url": "https://www.lidl-hellas.gr/p/eridanous-koyrampiedes-n-karvalis/p11526448"
+   "url": "https://www.lidl-hellas.gr/p/favorina-koyrampiedes-n-karvalis/p11526448"
   },
   {
-   "title": "Favorina Μελομακάρονα",
+   "title": "ERIDANOUS Μελομακάρονα",
    "price": 7.49,
    "packaging": "960 g",
    "when": "Στο κατάστημα",
    "loose": false,
    "pack_g": 960.0,
    "price_kg": 7.8,
-   "url": "https://www.lidl-hellas.gr/p/favorina-melomakarona/p11150026"
+   "url": "https://www.lidl-hellas.gr/p/eridanous-melomakarona/p11150026"
   },
   {
    "title": "Favorina Γεμιστά σοκολατάκια με φιστίκι",
@@ -2403,32 +2373,32 @@
   },
   {
    "title": "Haribo Maoam (Maoam Spooky Mix)",
-   "price": 4.69,
-   "packaging": "400 g",
+   "price": null,
+   "packaging": "",
    "when": "",
    "loose": false,
-   "pack_g": 400.0,
-   "price_kg": 11.73,
+   "pack_g": null,
+   "price_kg": null,
    "url": "https://www.lidl-hellas.gr/p/haribo-maoam/p11252064011"
   },
   {
    "title": "Σοκολατένιο γλειφιτζούρι με Halloween φιγούρες",
-   "price": 1.99,
-   "packaging": "150 g",
+   "price": null,
+   "packaging": "",
    "when": "μόνο στο κατάστημα 22.10. - 27.10.",
    "loose": false,
-   "pack_g": 150.0,
-   "price_kg": 13.27,
+   "pack_g": null,
+   "price_kg": null,
    "url": "https://www.lidl-hellas.gr/p/sokolatenio-gleifitzoyri-me-halloween-figoyres/p11003451"
   },
   {
    "title": "HALLOWEEN Marshmallows",
-   "price": 1.99,
-   "packaging": "275 g",
+   "price": null,
+   "packaging": "",
    "when": "μόνο στο κατάστημα 22.10. - 27.10.",
    "loose": false,
-   "pack_g": 275.0,
-   "price_kg": 7.24,
+   "pack_g": null,
+   "price_kg": null,
    "url": "https://www.lidl-hellas.gr/p/halloween-marshmallows/p11030376"
   },
   {
@@ -2652,16 +2622,6 @@
    "url": "https://www.lidl-hellas.gr/p/purio-sakoyles-aporrimmaton-60l-me-kordoni/p11473616"
   },
   {
-   "title": "Alfa Τυρόπιτα κοζανίτικη Κιχί με φέτα Π.Ο.Π. & μυζήθρα",
-   "price": null,
-   "packaging": "",
-   "when": "μόνο στο κατάστημα 22.10. - 27.10.",
-   "loose": false,
-   "pack_g": null,
-   "price_kg": null,
-   "url": "https://www.lidl-hellas.gr/p/alfa-tyropita-kozanitiki-kici-me-feta-p-o-p-myzitra/p11528805"
-  },
-  {
    "title": "Αγιωργίτικο Ερυθρός οίνος ξηρός Π.Ο.Π.",
    "price": 1.99,
    "packaging": "750 ml",
@@ -2793,12 +2753,12 @@
   },
   {
    "title": "Αφρώδης οίνος ροζέ Demi Sec Π.Ο.Π. Αμύνταιο 2024",
-   "price": 6.29,
-   "packaging": "750 ml",
+   "price": null,
+   "packaging": "",
    "when": "μόνο στο κατάστημα 22.10. - 27.10.",
    "loose": false,
-   "pack_g": 750.0,
-   "price_kg": 8.39,
+   "pack_g": null,
+   "price_kg": null,
    "url": "https://www.lidl-hellas.gr/p/afrodis-oinos-roze-demi-sec-p-o-p-amyntaio-2024/p11257718"
   },
   {
