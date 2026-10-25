@@ -1,154 +1,125 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Φθηνό Πλάνο</title>
-<meta name="description" content="Εβδομαδιαίο πλάνο γευμάτων με τις προσφορές Lidl">
-<meta name="theme-color" content="#0b3d91">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Φθηνό Πλάνο">
-<style>
-:root {
-  --bg: #f4f6fb; --surface: #ffffff; --text: #1f2a37; --muted: #6b7a90; --line: #e3e8f0;
-  --primary: #0b3d91; --primary-2: #1f6fd1; --accent: #ffd43b; --accent-text: #4a3700;
-  --cook-bg: #fff8d6; --offer-bg: #e3f6ea; --offer-text: #17734a; --est-bg: #eef1f5; --tip: #a3451d;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f141c; --surface: #18202b; --text: #e6ebf2; --muted: #93a1b5; --line: #263142;
-    --primary: #7fb0ff; --primary-2: #3d7be0; --cook-bg: #2b2715; --offer-bg: #143222; --offer-text: #7fdca8;
-    --est-bg: #232c38; --tip: #f0a57c;
-  }
-}
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--bg); color: var(--text);
-  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; }
-.hero { background: linear-gradient(140deg, #0b3d91, #1f6fd1); color: #fff;
-  padding: calc(env(safe-area-inset-top) + 18px) 16px 16px; border-radius: 0 0 22px 22px; }
-.hero h1 { margin: 0; font-size: 1.45rem; }
-.hero .range { opacity: .9; font-size: .92rem; }
-.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
-.stat { background: rgba(255,255,255,.15); border-radius: 14px; padding: 8px 12px; }
-.stat b { display: block; font-size: 1.35rem; }
-.stat span { font-size: .78rem; opacity: .9; }
-.stat.accent { background: var(--accent); color: var(--accent-text); }
-.controls { display: grid; gap: 10px; margin-top: 14px; }
-.ctl { display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  background: rgba(255,255,255,.12); border-radius: 14px; padding: 8px 10px 8px 14px; }
-.ctl label { font-size: .9rem; }
-.stepper { display: flex; align-items: center; gap: 4px; }
-.stepper b { min-width: 2ch; text-align: center; font-size: 1.15rem; }
-.hero button { font: inherit; color: #fff; background: rgba(255,255,255,.18); border: 0; border-radius: 10px;
-  min-width: 42px; height: 38px; font-size: 1.05rem; cursor: pointer; }
-.seg { display: flex; gap: 4px; }
-.seg button.on { background: #fff; color: var(--primary-2); font-weight: 700; }
-.status { font-size: .75rem; opacity: .85; margin: 10px 2px 0; }
-.tabs { position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; padding: 10px 16px;
-  background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); }
-.tabs button { flex: 1; font: inherit; font-size: .9rem; font-weight: 600; padding: 9px 4px; border-radius: 12px;
-  border: 1px solid var(--line); background: var(--surface); color: var(--muted); cursor: pointer; }
-.tabs button.on { background: var(--primary-2); border-color: var(--primary-2); color: #fff; }
-main { padding: 4px 16px calc(env(safe-area-inset-bottom) + 90px); max-width: 720px; margin: 0 auto; }
-.panel h3 { margin: 18px 0 8px; font-size: 1.05rem; color: var(--primary); }
-.day, .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; margin-bottom: 10px; }
-.day header { display: flex; align-items: center; justify-content: space-between; }
-.day h3 { margin: 0 0 6px; color: var(--text); }
-.day h3 small { color: var(--muted); font-weight: 400; }
-.day.cookday { background: var(--cook-bg); }
-.day dl { display: grid; grid-template-columns: 7.2em 1fr; gap: 4px 8px; margin: 0; font-size: .93rem; }
-.day dt { color: var(--muted); }
-.day dd { margin: 0; }
-.day dd.lunch { font-weight: 700; color: var(--primary); }
-.badge { display: inline-block; font-size: .72rem; font-weight: 700; border-radius: 7px; padding: 2px 7px; }
-.badge.cook { background: var(--accent); color: var(--accent-text); }
-.badge.offer { background: var(--offer-bg); color: var(--offer-text); }
-.badge.est { background: var(--est-bg); color: var(--muted); }
-.card h4 { margin: 0 0 2px; font-size: 1.02rem; }
-.card .meta { color: var(--muted); font-size: .82rem; margin: 0 0 6px; }
-.card ul { margin: 6px 0; padding-left: 18px; font-size: .93rem; }
-.card li b { font-weight: 600; color: var(--muted); }
-.card .how { background: var(--bg); border-radius: 10px; padding: 8px 10px; font-size: .9rem; margin: 6px 0 0; }
-.card .tip { color: var(--tip); font-size: .85rem; margin: 6px 0 0; }
-.card p { margin: 4px 0; }
-.shop .item { display: flex; gap: 10px; background: var(--surface); border: 1px solid var(--line);
-  border-radius: 14px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer; }
-.shop input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--primary-2); flex: none; }
-.shop .body { display: grid; gap: 2px; flex: 1; min-width: 0; }
-.shop .row { display: flex; justify-content: space-between; gap: 8px; }
-.shop .cost { font-weight: 700; white-space: nowrap; }
-.shop .sub, .shop .src { font-size: .8rem; color: var(--muted); }
-.shop .item.done { opacity: .5; }
-.shop .item.done b { text-decoration: line-through; }
-.total { text-align: right; font-size: 1.05rem; margin: 14px 2px; }
-.total b { color: var(--primary); font-size: 1.3rem; }
-.fab { position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom) + 16px); z-index: 6;
-  font: inherit; font-weight: 700; border: 0; border-radius: 999px; padding: 13px 20px;
-  background: var(--accent); color: var(--accent-text); box-shadow: 0 6px 18px rgba(0,0,0,.22); cursor: pointer; }
-.note { font-size: .75rem; color: var(--muted); margin-top: 18px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Έξυπνο Πλάνο Γευμάτων</title>
+    <style>
+        /* Μεταβλητές για Dark Mode (Προεπιλογή) */
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #4CAF50;
+            --text-main: #e0e0e0;
+            --text-muted: #9e9e9e;
+            --border-color: #333;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            --btn-text: #ffffff;
+            --summary-bg: linear-gradient(135deg, #1f4037, #2d5a46);
+            --input-bg: #2a2a2a;
+        }
 
-/* PDF / εκτύπωση: όλες οι ενότητες μαζί */
-@media print {
-  @page { size: A4; margin: 12mm; }
-  :root { --bg: #fff; --surface: #fff; --text: #1f2a37; --muted: #5d6b80; --line: #dfe5ee; --primary: #0b3d91; --cook-bg: #fff8d6; }
-  body { font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .tabs, .fab, .controls, .status { display: none !important; }
-  .hero { border-radius: 14px; padding: 14px 16px; }
-  .panel { display: block !important; }
-  .panel::before { display: block; font-size: 15px; font-weight: 700; color: var(--primary); margin: 14px 0 6px; }
-  #week::before { content: "Η εβδομάδα"; }
-  #cooking::before { content: "Μαγειρέματα"; }
-  #shop::before { content: "Λίστα αγορών"; }
-  #shop { break-before: page; }
-  #week { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px; }
-  #week::before { grid-column: 1 / -1; }
-  .day, .card, .shop .item { break-inside: avoid; margin-bottom: 6px; padding: 8px 10px; }
-  main { padding: 0; max-width: none; }
-}
-</style>
+        /* Μεταβλητές για Light Mode */
+        body.light-mode {
+            --bg-color: #f4f7f6;
+            --surface-color: #ffffff;
+            --primary-color: #2e7d32;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #dddddd;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --btn-text: #ffffff;
+            --summary-bg: linear-gradient(135deg, #4CAF50, #81C784);
+            --input-bg: #f9f9f9;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 20px; line-height: 1.6; transition: background-color 0.3s, color 0.3s; }
+        .container { max-width: 1100px; margin: auto; }
+        
+        /* Header & Theme Toggle */
+        header { text-align: center; margin-bottom: 30px; position: relative; }
+        h1 { color: var(--text-main); margin-bottom: 5px; }
+        .subtitle { color: var(--text-muted); font-size: 0.9em; margin-bottom: 20px; }
+        
+        .theme-toggle { position: absolute; top: 0; right: 0; background: var(--surface-color); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 1em; box-shadow: var(--card-shadow); transition: 0.3s; }
+        .theme-toggle:hover { background: var(--border-color); }
+
+        /* Store Selector */
+        .store-selector { background: var(--surface-color); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color); box-shadow: var(--card-shadow); transition: 0.3s; }
+        .store-selector h3 { margin-top: 0; font-size: 1.1em; color: var(--primary-color); }
+        .stores-grid { display: flex; flex-wrap: wrap; gap: 15px; }
+        .store-checkbox { display: flex; align-items: center; gap: 8px; cursor: pointer; background: var(--input-bg); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color); transition: 0.2s; color: var(--text-main); }
+        .store-checkbox:hover { border-color: var(--primary-color); }
+        .store-checkbox input { accent-color: var(--primary-color); transform: scale(1.2); cursor: pointer; }
+
+        /* Week Summary */
+        .week-summary { display: flex; justify-content: space-around; background: var(--summary-bg); padding: 20px; border-radius: 12px; margin-bottom: 30px; text-align: center; box-shadow: var(--card-shadow); transition: 0.3s; }
+        .summary-item { font-size: 1.2em; font-weight: bold; color: #ffffff; }
+        .summary-value { color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); font-size: 1.5em; display: block; margin-top: 5px; }
+
+        /* Main Layout */
+        .main-layout { display: flex; gap: 30px; flex-wrap: wrap; }
+        .meal-plan-column { flex: 2; min-width: 300px; }
+        .shopping-column { flex: 1; min-width: 300px; }
+
+        /* Meal Cards */
+        .day-card { background: var(--surface-color); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid var(--primary-color); box-shadow: var(--card-shadow); transition: 0.3s; }
+        .day-title { font-weight: bold; font-size: 1.2em; color: var(--text-main); margin-bottom: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .meal { margin-bottom: 8px; color: var(--text-main); }
+        .meal-type { font-weight: bold; color: var(--primary-color); width: 110px; display: inline-block; }
+
+        /* Shopping List */
+        .shopping-card { background: var(--surface-color); border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); box-shadow: var(--card-shadow); position: sticky; top: 20px; transition: 0.3s; }
+        .shopping-card h2 { margin-top: 0; color: var(--text-main); font-size: 1.2em; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        .shopping-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed var(--border-color); }
+        .shopping-item:last-child { border-bottom: none; }
+        .item-info strong { display: block; color: var(--text-main); }
+        .item-info small { color: var(--text-muted); font-size: 0.8em; }
+        .item-price { text-align: right; }
+        .price-tag { color: var(--primary-color); font-weight: bold; font-size: 1.1em; display: block; }
+        .store-tag { font-size: 0.75em; color: var(--text-muted); background: var(--input-bg); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color); }
+
+        .btn-print { background: var(--primary-color); color: var(--btn-text); border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-size: 1em; width: 100%; margin-top: 20px; font-weight: bold; transition: 0.2s; }
+        .btn-print:hover { opacity: 0.9; }
+    </style>
 </head>
 <body>
-<div class="hero">
-  <h1>Φθηνό πλάνο εβδομάδας</h1>
-  <div class="range">Εβδομάδα <span id="range"></span> · με τις προσφορές Lidl</div>
-  <div class="stats">
-    <div class="stat accent"><b id="total">–</b><span>κόστος εβδομάδας</span></div>
-    <div class="stat"><b id="ppd">–</b><span>ανά άτομο / ημέρα</span></div>
-  </div>
-  <div class="controls">
-    <div class="ctl">
-      <label>Άτομα</label>
-      <div class="stepper"><button id="minus" aria-label="Λιγότερα άτομα">−</button><b id="people">2</b><button id="plus" aria-label="Περισσότερα άτομα">+</button></div>
+    <div class="container">
+        <header>
+            <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">☀️ Φωτεινό</button>
+            <h1>🍲 Έξυπνο Πλάνο Γευμάτων</h1>
+            <div class="subtitle">Οργάνωσε το μενού της εβδομάδας και βρες πού θα ψωνίσεις φθηνότερα.</div>
+        </header>
+
+        <div class="store-selector" id="store-filters">
+            <h3>Διάλεξε καταστήματα για σύγκριση:</h3>
+            <div class="stores-grid" id="stores-grid">
+                <!-- Θα γεμίσει με JavaScript -->
+            </div>
+        </div>
+
+        <div class="week-summary">
+            <div class="summary-item">Συνολικό Κόστος <span class="summary-value" id="total-cost">0.00€</span></div>
+            <div class="summary-item">Ανά άτομο / ημέρα <span class="summary-value" id="cost-per-day">0.00€</span></div>
+        </div>
+
+        <div class="main-layout">
+            <div class="meal-plan-column" id="meal-plan">
+                <!-- Θα γεμίσει με JavaScript -->
+            </div>
+
+            <div class="shopping-column">
+                <div class="shopping-card">
+                    <h2>🛒 Λίστα Αγορών</h2>
+                    <div id="shopping-list-items">
+                        <!-- Θα γεμίσει με JavaScript -->
+                    </div>
+                    <button class="btn-print" onclick="window.print()">Εκτύπωση / PDF</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="ctl">
-      <label>Μαγειρέματα / εβδομάδα</label>
-      <div class="seg"><button data-sessions="1">1</button><button data-sessions="2">2</button><button data-sessions="3">3</button></div>
-    </div>
-  </div>
-  <p class="status" id="status">Φορτώνω τις προσφορές…</p>
-</div>
 
-<nav class="tabs">
-  <button data-tab="week">Εβδομάδα</button>
-  <button data-tab="cooking">Μαγείρεμα</button>
-  <button data-tab="shop">Λίστα</button>
-</nav>
-
-<main>
-  <div class="panel" id="week"></div>
-  <div class="panel" id="cooking" hidden></div>
-  <div class="panel" id="shop" hidden></div>
-  <p class="note">Τιμές «Προσφορά» από το lidl-hellas.gr. Οι τιμές «Εκτίμηση» είναι κατά προσέγγιση κανονικές τιμές σούπερ μάρκετ. Οι προσφορές ισχύουν συνήθως λίγες μέρες – δες την ημερομηνία.</p>
-</main>
-
-<button class="fab" id="pdf">PDF</button>
-
-<script src="data.js"></script>
-<script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
