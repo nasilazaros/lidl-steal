@@ -1,126 +1,208 @@
-<!DOCTYPE html>
-<html lang="el">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Έξυπνο Πλάνο Γευμάτων</title>
-    <style>
-        /* Μεταβλητές για Dark Mode (Προεπιλογή) */
-        :root {
-            --bg-color: #121212;
-            --surface-color: #1e1e1e;
-            --primary-color: #4CAF50;
-            --text-main: #e0e0e0;
-            --text-muted: #9e9e9e;
-            --border-color: #333;
-            --card-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            --btn-text: #ffffff;
-            --summary-bg: linear-gradient(135deg, #1f4037, #2d5a46);
-            --input-bg: #2a2a2a;
-        }
+// --- 1. ΔΕΔΟΜΕΝΑ ΣΥΝΤΑΓΩΝ ---
+const mealPlan = [
+    { day: "Δευτέρα", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Λουκάνικα με πιπεριές και πατάτες", dinner: "Τοστ με τυρί και γαλοπούλα" },
+    { day: "Τρίτη", breakfast: "Τοστ με τυρί και γαλοπούλα", snack: "1 μήλο", lunch: "Ρεβίθια λεμονάτα", dinner: "Κορνφλέικς με γάλα" },
+    { day: "Τετάρτη", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Λουκάνικα με πιπεριές και πατάτες", dinner: "Τοστ με τυρί και γαλοπούλα" },
+    { day: "Πέμπτη", breakfast: "Τοστ με τυρί και γαλοπούλα", snack: "1 μήλο", lunch: "Κοτόσουπα αυγολέμονο", dinner: "Κορνφλέικς με γάλα" },
+    { day: "Παρασκευή", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Φακές σούπα", dinner: "Τοστ με τυρί και γαλοπούλα" },
+    { day: "Σάββατο", breakfast: "Τοστ με τυρί και γαλοπούλα", snack: "1 μήλο", lunch: "Κοτόσουπα αυγολέμονο", dinner: "Κορνφλέικς με γάλα" },
+    { day: "Κυριακή", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Φακές σούπα", dinner: "Τοστ με τυρί και γαλοπούλα" }
+];
 
-        /* Μεταβλητές για Light Mode */
-        body.light-mode {
-            --bg-color: #f4f7f6;
-            --surface-color: #ffffff;
-            --primary-color: #2e7d32;
-            --text-main: #333333;
-            --text-muted: #666666;
-            --border-color: #dddddd;
-            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            --btn-text: #ffffff;
-            --summary-bg: linear-gradient(135deg, #4CAF50, #81C784);
-            --input-bg: #f9f9f9;
-        }
+// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ (Πολλαπλές λέξεις αναζήτησης για σιγουριά) ---
+const shoppingListTemplate = [
+    { name: "Γάλα", qty: "2 L", search: ["γάλα"] },
+    { name: "Δημητριακά (Κορνφλέικς)", qty: "1 πακέτο", search: ["δημητριακά", "κορνφλέικς", "corn flakes"] },
+    { name: "Ψωμί για τοστ", qty: "1 πακέτο", search: ["ψωμί", "toast", "σάντουιτς"] },
+    { name: "Τυρί", qty: "500g", search: ["τυρί"] },
+    { name: "Γαλοπούλα", qty: "300g", search: ["γαλοπούλα"] },
+    { name: "Λουκάνικα", qty: "600g", search: ["λουκάνικα"] },
+    { name: "Πατάτες", qty: "1.2 kg", search: ["πατάτα", "πατάτες"] },
+    { name: "Πιπεριές", qty: "400g", search: ["πιπεριά", "πιπεριές"] },
+    { name: "Ρεβίθια", qty: "500g", search: ["ρεβίθια"] },
+    { name: "Κρεμμύδια", qty: "500g", search: ["κρεμμύδι", "κρεμμύδια"] },
+    { name: "Λεμόνια", qty: "4 τεμ", search: ["λεμόνι", "λεμόνια"] },
+    { name: "Κοτόπουλο", qty: "1 kg", search: ["κοτόπουλο"] },
+    { name: "Ρύζι", qty: "500g", search: ["ρύζι"] },
+    { name: "Καρότα", qty: "500g", search: ["καρότο", "καρότα"] },
+    { name: "Φακές", qty: "500g", search: ["φακές"] },
+    { name: "Τομάτα τριμμένη", qty: "400g", search: ["τομάτα", "ντομάτα"] },
+    { name: "Ελαιόλαδο", qty: "1 L", search: ["ελαιόλαδο", "λάδι"] },
+    { name: "Μπανάνες", qty: "5 τεμ", search: ["μπανάνα", "μπανάνες"] },
+    { name: "Μήλα", qty: "5 τεμ", search: ["μήλο", "μήλα"] }
+];
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; padding: 20px; line-height: 1.6; transition: background-color 0.3s, color 0.3s; }
-        .container { max-width: 1100px; margin: auto; }
+let availableStores = [];
+let selectedStores = [];
+let productsData = [];
+let pricesData = {};
+
+// --- 3. ΔΙΑΧΕΙΡΙΣΗ ΘΕΜΑΤΟΣ (DARK / LIGHT) ---
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (!toggleBtn) return;
+    
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        toggleBtn.innerText = '🌙';
+    } else {
+        document.body.classList.remove('light-mode');
+        toggleBtn.innerText = '☀️';
+    }
+}
+
+window.toggleTheme = function() {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (toggleBtn) {
+        toggleBtn.innerText = isLight ? '🌙' : '☀️';
+    }
+};
+
+// --- 4. ΦΟΡΤΩΣΗ ΚΑΙ ΕΚΚΙΝΗΣΗ ---
+document.addEventListener('DOMContentLoaded', async () => {
+    initTheme();
+    
+    try {
+        const [prodRes, priceRes] = await Promise.all([
+            fetch('products.json'),
+            fetch('prices.json')
+        ]);
         
-        /* Header & Theme Toggle */
-        header { text-align: center; margin-bottom: 30px; position: relative; }
-        h1 { color: var(--text-main); margin-bottom: 5px; }
-        .subtitle { color: var(--text-muted); font-size: 0.9em; margin-bottom: 20px; }
+        if(!prodRes.ok || !priceRes.ok) throw new Error("JSON not found");
         
-        .theme-toggle { position: absolute; top: 0; right: 0; background: var(--surface-color); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 12px; border-radius: 50%; cursor: pointer; font-size: 1.2em; box-shadow: var(--card-shadow); transition: 0.3s; display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; }
-        .theme-toggle:hover { background: var(--border-color); }
+        productsData = await prodRes.json();
+        pricesData = await priceRes.json();
 
-        /* Store Selector */
-        .store-selector { background: var(--surface-color); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color); box-shadow: var(--card-shadow); transition: 0.3s; }
-        .store-selector h3 { margin-top: 0; font-size: 1.1em; color: var(--primary-color); }
-        .stores-grid { display: flex; flex-wrap: wrap; gap: 15px; }
-        .store-checkbox { display: flex; align-items: center; gap: 8px; cursor: pointer; background: var(--input-bg); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color); transition: 0.2s; color: var(--text-main); }
-        .store-checkbox:hover { border-color: var(--primary-color); }
-        .store-checkbox input { accent-color: var(--primary-color); transform: scale(1.2); cursor: pointer; }
+        const storeSet = new Set();
+        productsData.forEach(p => {
+            const pPrices = pricesData[p.id] || [];
+            pPrices.forEach(pr => {
+                if (pr.retailer_name) storeSet.add(pr.retailer_name);
+            });
+        });
+        availableStores = Array.from(storeSet).sort();
+        selectedStores = [...availableStores];
 
-        /* Week Summary */
-        .week-summary { display: flex; justify-content: space-around; background: var(--summary-bg); padding: 20px; border-radius: 12px; margin-bottom: 30px; text-align: center; box-shadow: var(--card-shadow); transition: 0.3s; }
-        .summary-item { font-size: 1.2em; font-weight: bold; color: #ffffff; }
-        .summary-value { color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); font-size: 1.5em; display: block; margin-top: 5px; }
+        renderStoreFilters();
+        renderMealPlan();
+        calculateCosts();
 
-        /* Main Layout */
-        .main-layout { display: flex; gap: 30px; flex-wrap: wrap; }
-        .meal-plan-column { flex: 2; min-width: 300px; }
-        .shopping-column { flex: 1; min-width: 300px; }
+    } catch (e) {
+        console.error("Σφάλμα:", e);
+        const costElement = document.getElementById('total-cost');
+        if (costElement) costElement.innerText = "Σφάλμα (Δεν βρέθηκαν τα JSON)";
+    }
+});
 
-        /* Meal Cards */
-        .day-card { background: var(--surface-color); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 4px solid var(--primary-color); box-shadow: var(--card-shadow); transition: 0.3s; }
-        .day-title { font-weight: bold; font-size: 1.2em; color: var(--text-main); margin-bottom: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
-        .meal { margin-bottom: 8px; color: var(--text-main); }
-        .meal-type { font-weight: bold; color: var(--primary-color); width: 110px; display: inline-block; }
+// --- 5. ΜΕΝΟΥ ΚΑΤΑΣΤΗΜΑΤΩΝ ---
+function renderStoreFilters() {
+    const grid = document.getElementById('stores-grid');
+    if (!grid) return;
+    
+    grid.innerHTML = availableStores.map(store => `
+        <label class="store-checkbox">
+            <input type="checkbox" value="${store}" checked onchange="toggleStore(this)">
+            ${store}
+        </label>
+    `).join('');
+}
 
-        /* Shopping List */
-        .shopping-card { background: var(--surface-color); border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); box-shadow: var(--card-shadow); position: sticky; top: 20px; transition: 0.3s; }
-        .shopping-card h2 { margin-top: 0; color: var(--text-main); font-size: 1.2em; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
-        .shopping-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed var(--border-color); }
-        .shopping-item:last-child { border-bottom: none; }
-        .item-info strong { display: block; color: var(--text-main); }
-        .item-info small { color: var(--text-muted); font-size: 0.8em; }
-        .item-price { text-align: right; }
-        .price-tag { color: var(--primary-color); font-weight: bold; font-size: 1.1em; display: block; }
-        .store-tag { font-size: 0.75em; color: var(--text-muted); background: var(--input-bg); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color); }
+window.toggleStore = function(checkbox) {
+    const store = checkbox.value;
+    if (checkbox.checked) {
+        if (!selectedStores.includes(store)) selectedStores.push(store);
+    } else {
+        selectedStores = selectedStores.filter(s => s !== store);
+    }
+    calculateCosts();
+};
 
-        .btn-print { background: var(--primary-color); color: var(--btn-text); border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-size: 1em; width: 100%; margin-top: 20px; font-weight: bold; transition: 0.2s; }
-        .btn-print:hover { opacity: 0.9; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <!-- Άλλαξε σε μόνο εικονίδιο -->
-            <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">☀️</button>
-            <h1>🍲 Έξυπνο Πλάνο Γευμάτων</h1>
-            <div class="subtitle">Οργάνωσε το μενού της εβδομάδας και βρες πού θα ψωνίσεις φθηνότερα.</div>
-        </header>
+// --- 6. ΕΜΦΑΝΙΣΗ ΠΛΑΝΟΥ ---
+function renderMealPlan() {
+    const container = document.getElementById('meal-plan');
+    if (!container) return;
 
-        <div class="store-selector" id="store-filters">
-            <h3>Διάλεξε καταστήματα για σύγκριση:</h3>
-            <div class="stores-grid" id="stores-grid">
-                <!-- Θα γεμίσει με JavaScript -->
-            </div>
+    container.innerHTML = mealPlan.map(day => `
+        <div class="day-card">
+            <div class="day-title">${day.day}</div>
+            <div class="meal"><span class="meal-type">Πρωινό:</span> ${day.breakfast}</div>
+            <div class="meal"><span class="meal-type">Δεκατιανό:</span> ${day.snack}</div>
+            <div class="meal"><span class="meal-type">Μεσημεριανό:</span> ${day.lunch}</div>
+            <div class="meal"><span class="meal-type">Βραδινό:</span> ${day.dinner}</div>
         </div>
+    `).join('');
+}
 
-        <div class="week-summary">
-            <div class="summary-item">Συνολικό Κόστος <span class="summary-value" id="total-cost">0.00€</span></div>
-            <div class="summary-item">Ανά άτομο / ημέρα <span class="summary-value" id="cost-per-day">0.00€</span></div>
-        </div>
+// --- 7. ΕΞΥΠΝΟΣ ΥΠΟΛΟΓΙΣΜΟΣ ΚΟΣΤΟΥΣ ---
+function findCheapestPrice(searchTerms) {
+    let cheapest = { price: Infinity, store: '', productName: '' };
 
-        <div class="main-layout">
-            <div class="meal-plan-column" id="meal-plan">
-                <!-- Θα γεμίσει με JavaScript -->
-            </div>
+    // Ελέγχουμε κάθε λέξη-κλειδί για το προϊόν
+    searchTerms.forEach(term => {
+        const lowerTerm = term.toLowerCase();
+        
+        productsData.forEach(product => {
+            if (product.name && product.name.toLowerCase().includes(lowerTerm)) {
+                const pPrices = pricesData[product.id] || [];
+                pPrices.forEach(pr => {
+                    if (selectedStores.includes(pr.retailer_name)) {
+                        if (pr.price < cheapest.price) {
+                            cheapest = { price: pr.price, store: pr.retailer_name, productName: product.name };
+                        }
+                    }
+                });
+            }
+        });
+    });
+    
+    return cheapest;
+}
 
-            <div class="shopping-column">
-                <div class="shopping-card">
-                    <h2>🛒 Λίστα Αγορών</h2>
-                    <div id="shopping-list-items">
-                        <!-- Θα γεμίσει με JavaScript -->
+function calculateCosts() {
+    let total = 0;
+    const listContainer = document.getElementById('shopping-list-items');
+    if (!listContainer) return;
+    
+    listContainer.innerHTML = shoppingListTemplate.map(item => {
+        const best = findCheapestPrice(item.search);
+        
+        if (best.price !== Infinity) {
+            total += best.price;
+            return `
+                <div class="shopping-item">
+                    <div class="item-info">
+                        <strong>${item.name}</strong>
+                        <small>${item.qty}</small>
                     </div>
-                    <button class="btn-print" onclick="window.print()">Εκτύπωση / PDF</button>
+                    <div class="item-price">
+                        <span class="price-tag">${best.price.toFixed(2)}€</span>
+                        <span class="store-tag">${best.store}</span>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            `;
+        } else {
+            return `
+                <div class="shopping-item">
+                    <div class="item-info">
+                        <strong>${item.name}</strong>
+                        <small>${item.qty}</small>
+                    </div>
+                    <div class="item-price">
+                        <span style="color:#ff5252; font-size:0.8em;">Μη διαθέσιμο</span>
+                    </div>
+                </div>
+            `;
+        }
+    }).join('');
 
-    <script src="app.js"></script>
-</body>
-</html>
+    const totalElement = document.getElementById('total-cost');
+    const perDayElement = document.getElementById('cost-per-day');
+    
+    if (totalElement) totalElement.innerText = total.toFixed(2) + "€";
+    if (perDayElement) perDayElement.innerText = (total / 2 / 7).toFixed(2) + "€";
+}
