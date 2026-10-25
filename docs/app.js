@@ -9,7 +9,7 @@ const mealPlan = [
     { day: "Κυριακή", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Φακές σούπα", dinner: "Τοστ με τυρί και γαλοπούλα" }
 ];
 
-// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ (Απλή λίστα) ---
+// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ ---
 const shoppingListTemplate = [
     { name: "Γάλα", qty: "2 L", search: ["γάλα"] },
     { name: "Δημητριακά (Κορνφλέικς)", qty: "1 πακέτο", search: ["δημητριακά", "κορνφλέικς"] },
@@ -37,7 +37,7 @@ let selectedStores = [];
 let productsData = [];
 let pricesData = {};
 
-// --- 3. ΔΙΑΧΕΙΡΙΣΗ ΘΕΜΑΤΟΣ (DARK / LIGHT) ---
+// --- 3. ΔΙΑΧΕΙΡΙΣΗ ΘΕΜΑΤΟΣ ---
 function initTheme() {
     const savedTheme = localStorage.getItem('theme');
     const toggleBtn = document.getElementById('theme-toggle');
@@ -138,9 +138,9 @@ function renderMealPlan() {
     `).join('');
 }
 
-// --- 7. ΑΠΛΟΣ ΥΠΟΛΟΓΙΣΜΟΣ (Βρίσκει το φθηνότερο προϊόν) ---
+// --- 7. ΕΞΥΠΝΟΣ ΥΠΟΛΟΓΙΣΜΟΣ (Χρησιμοποιεί την τιμή ανά κιλό/λίτρο) ---
 function findCheapestPrice(searchTerms) {
-    let cheapest = { price: Infinity, store: '', productName: '' };
+    let cheapest = { price: Infinity, store: '', unit: '' };
 
     searchTerms.forEach(term => {
         const lowerTerm = term.toLowerCase();
@@ -151,12 +151,15 @@ function findCheapestPrice(searchTerms) {
                 
                 pPrices.forEach(pr => {
                     if (selectedStores.includes(pr.retailer_name)) {
-                        // Παίρνουμε απλώς την τιμή του προϊόντος
-                        if (pr.price < cheapest.price) {
+                        // Χρησιμοποιούμε το price_per_unit (τιμή ανά κιλό/λίτρο) για σωστή σύγκριση
+                        // Αν δεν υπάρχει, χρησιμοποιούμε την κανονική τιμή
+                        const comparePrice = (pr.price_per_unit && pr.price_per_unit > 0) ? pr.price_per_unit : pr.price;
+                        
+                        if (comparePrice < cheapest.price) {
                             cheapest = { 
-                                price: pr.price, 
+                                price: comparePrice, 
                                 store: pr.retailer_name, 
-                                productName: product.name 
+                                unit: product.unit || 'τεμ'
                             };
                         }
                     }
@@ -178,28 +181,23 @@ function calculateCosts() {
         
         if (best.price !== Infinity) {
             total += best.price;
-            // Εδώ προσθέτουμε το best.productName για να βλέπεις τι ακριβώς προϊόν είναι
             return `
                 <div class="shopping-item">
-                    <div class="item-info">
-                        <strong>${item.name} (${item.qty})</strong>
-                        <small>${best.productName}</small>
+                    <div class="shopping-text">
+                        Πάρε <span class="shopping-highlight">${item.name}</span> από <span class="shopping-highlight">${best.store}</span> γιατί έχει την χαμηλότερη τιμή.
                     </div>
-                    <div class="item-price">
-                        <span class="price-tag">${best.price.toFixed(2)}€</span>
-                        <span class="store-tag">${best.store}</span>
-                    </div>
+                    <span class="shopping-sub">
+                        (Τιμή: ${best.price.toFixed(2)}€ / ${best.unit})
+                    </span>
                 </div>
             `;
         } else {
             return `
                 <div class="shopping-item">
-                    <div class="item-info">
-                        <strong>${item.name} (${item.qty})</strong>
+                    <div class="shopping-text">
+                        <span style="color:#ff5252;">Μη διαθέσιμο στα επιλεγμένα καταστήματα.</span>
                     </div>
-                    <div class="item-price">
-                        <span style="color:#ff5252; font-size:0.8em;">Μη διαθέσιμο</span>
-                    </div>
+                    <span class="shopping-sub">${item.name}</span>
                 </div>
             `;
         }
