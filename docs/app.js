@@ -9,22 +9,22 @@ const mealPlan = [
     { day: "Κυριακή", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Φακές σούπα", dinner: "Τοστ με τυρί και γαλοπούλα" }
 ];
 
-// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ ---
+// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ (Έβαλα πιο γενικές λέξεις για να βρίσκει περισσότερα) ---
 const shoppingListTemplate = [
     { name: "Γάλα", qty: "2 L", search: "γάλα" },
-    { name: "Κορνφλέικς", qty: "1 πακέτο", search: "κορνφλέικς" },
-    { name: "Ψωμί του τοστ", qty: "1 πακέτο", search: "ψωμί του τοστ" },
+    { name: "Δημητριακά (Κορνφλέικς)", qty: "1 πακέτο", search: "δημητριακά" },
+    { name: "Ψωμί για τοστ", qty: "1 πακέτο", search: "ψωμί" },
     { name: "Τυρί", qty: "500g", search: "τυρί" },
     { name: "Γαλοπούλα", qty: "300g", search: "γαλοπούλα" },
     { name: "Λουκάνικα", qty: "600g", search: "λουκάνικα" },
-    { name: "Πατάτες", qty: "1.2 kg", search: "πατάτες" },
-    { name: "Πιπεριές", qty: "400g", search: "πιπεριές" },
+    { name: "Πατάτες", qty: "1.2 kg", search: "πατάτα" },
+    { name: "Πιπεριές", qty: "400g", search: "πιπεριά" },
     { name: "Ρεβίθια", qty: "500g", search: "ρεβίθια" },
-    { name: "Κρεμμύδια", qty: "500g", search: "κρεμμύδια" },
-    { name: "Λεμόνια", qty: "4 τεμ", search: "λεμόνια" },
+    { name: "Κρεμμύδια", qty: "500g", search: "κρεμμύδι" },
+    { name: "Λεμόνια", qty: "4 τεμ", search: "λεμόνι" },
     { name: "Κοτόπουλο", qty: "1 kg", search: "κοτόπουλο" },
     { name: "Ρύζι", qty: "500g", search: "ρύζι" },
-    { name: "Καρότα", qty: "500g", search: "καρότα" },
+    { name: "Καρότα", qty: "500g", search: "καρότο" },
     { name: "Φακές", qty: "500g", search: "φακές" },
     { name: "Τομάτα τριμμένη", qty: "400g", search: "τομάτα" },
     { name: "Ελαιόλαδο", qty: "1 L", search: "ελαιόλαδο" },
@@ -41,7 +41,7 @@ let pricesData = {};
 function initTheme() {
     const savedTheme = localStorage.getItem('theme');
     const toggleBtn = document.getElementById('theme-toggle');
-    if (!toggleBtn) return; // Ασφάλεια σε περίπτωση που δεν υπάρχει το κουμπί
+    if (!toggleBtn) return;
     
     if (savedTheme === 'light') {
         document.body.classList.add('light-mode');
@@ -65,10 +65,9 @@ window.toggleTheme = function() {
 
 // --- 4. ΦΟΡΤΩΣΗ ΚΑΙ ΕΚΚΙΝΗΣΗ ---
 document.addEventListener('DOMContentLoaded', async () => {
-    initTheme(); // Ξεκινάμε το θέμα πάντα πρώτο
+    initTheme();
     
     try {
-        // Εδώ ψάχνουμε τα αρχεία ακριβώς στον ίδιο φάκελο (χωρίς data/)
         const [prodRes, priceRes] = await Promise.all([
             fetch('products.json'),
             fetch('prices.json')
