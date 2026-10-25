@@ -9,28 +9,27 @@ const mealPlan = [
     { day: "Κυριακή", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Φακές σούπα", dinner: "Τοστ με τυρί και γαλοπούλα" }
 ];
 
-// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ (Με καθορισμό ποσότητας και μονάδας για σωστό υπολογισμό) ---
-// target: Η ποσότητα που θέλουμε. unit: 'kg', 'L' ή 'τεμ'
+// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ (Απλή λίστα) ---
 const shoppingListTemplate = [
-    { name: "Γάλα", qty: "2 L", target: 2, unit: "L", search: ["γάλα"] },
-    { name: "Δημητριακά (Κορνφλέικς)", qty: "1 πακέτο", target: 1, unit: "τεμ", search: ["δημητριακά", "κορνφλέικς", "corn flakes"] },
-    { name: "Ψωμί για τοστ", qty: "1 πακέτο", target: 1, unit: "τεμ", search: ["ψωμί", "toast", "σάντουιτς"] },
-    { name: "Τυρί", qty: "500g", target: 0.5, unit: "kg", search: ["τυρί", "κασέρι", "φέτα"] },
-    { name: "Γαλοπούλα", qty: "300g", target: 0.3, unit: "kg", search: ["γαλοπούλα", "ζαμπόν"] },
-    { name: "Λουκάνικα", qty: "600g", target: 0.6, unit: "kg", search: ["λουκάνικα"] },
-    { name: "Πατάτες", qty: "1.2 kg", target: 1.2, unit: "kg", search: ["πατάτα", "πατάτες"] },
-    { name: "Πιπεριές", qty: "400g", target: 0.4, unit: "kg", search: ["πιπεριά", "πιπεριές"] },
-    { name: "Ρεβίθια", qty: "500g", target: 0.5, unit: "kg", search: ["ρεβίθια"] },
-    { name: "Κρεμμύδια", qty: "500g", target: 0.5, unit: "kg", search: ["κρεμμύδι", "κρεμμύδια"] },
-    { name: "Λεμόνια", qty: "4 τεμ", target: 4, unit: "τεμ", search: ["λεμόνι", "λεμόνια"] },
-    { name: "Κοτόπουλο", qty: "1 kg", target: 1, unit: "kg", search: ["κοτόπουλο"] },
-    { name: "Ρύζι", qty: "500g", target: 0.5, unit: "kg", search: ["ρύζι"] },
-    { name: "Καρότα", qty: "500g", target: 0.5, unit: "kg", search: ["καρότο", "καρότα"] },
-    { name: "Φακές", qty: "500g", target: 0.5, unit: "kg", search: ["φακές"] },
-    { name: "Τομάτα τριμμένη", qty: "400g", target: 0.4, unit: "kg", search: ["τομάτα", "ντομάτα", "σάλτσα"] },
-    { name: "Ελαιόλαδο", qty: "1 L", target: 1, unit: "L", search: ["ελαιόλαδο", "λάδι"] },
-    { name: "Μπανάνες", qty: "1 kg", target: 1, unit: "kg", search: ["μπανάνα", "μπανάνες"] },
-    { name: "Μήλα", qty: "1 kg", target: 1, unit: "kg", search: ["μήλο", "μήλα"] }
+    { name: "Γάλα", qty: "2 L", search: ["γάλα"] },
+    { name: "Δημητριακά (Κορνφλέικς)", qty: "1 πακέτο", search: ["δημητριακά", "κορνφλέικς"] },
+    { name: "Ψωμί για τοστ", qty: "1 πακέτο", search: ["ψωμί", "toast"] },
+    { name: "Τυρί", qty: "500g", search: ["τυρί", "κασέρι", "φέτα"] },
+    { name: "Γαλοπούλα", qty: "300g", search: ["γαλοπούλα", "ζαμπόν"] },
+    { name: "Λουκάνικα", qty: "600g", search: ["λουκάνικα"] },
+    { name: "Πατάτες", qty: "1.2 kg", search: ["πατάτα", "πατάτες"] },
+    { name: "Πιπεριές", qty: "400g", search: ["πιπεριά", "πιπεριές"] },
+    { name: "Ρεβίθια", qty: "500g", search: ["ρεβίθια"] },
+    { name: "Κρεμμύδια", qty: "500g", search: ["κρεμμύδι", "κρεμμύδια"] },
+    { name: "Λεμόνια", qty: "4 τεμ", search: ["λεμόνι", "λεμόνια"] },
+    { name: "Κοτόπουλο", qty: "1 kg", search: ["κοτόπουλο"] },
+    { name: "Ρύζι", qty: "500g", search: ["ρύζι"] },
+    { name: "Καρότα", qty: "500g", search: ["καρότο", "καρότα"] },
+    { name: "Φακές", qty: "500g", search: ["φακές"] },
+    { name: "Τομάτα τριμμένη", qty: "400g", search: ["τομάτα", "ντομάτα"] },
+    { name: "Ελαιόλαδο", qty: "1 L", search: ["ελαιόλαδο", "λάδι"] },
+    { name: "Μπανάνες", qty: "1 kg", search: ["μπανάνα", "μπανάνες"] },
+    { name: "Μήλα", qty: "1 kg", search: ["μήλο", "μήλα"] }
 ];
 
 let availableStores = [];
@@ -139,11 +138,11 @@ function renderMealPlan() {
     `).join('');
 }
 
-// --- 7. ΕΞΥΠΝΟΣ ΥΠΟΛΟΓΙΣΜΟΣ ΚΟΣΤΟΥΣ (Με βάση την ποσότητα) ---
-function findCheapestPrice(item) {
-    let bestOption = { total_price: Infinity, store: '', productName: '' };
+// --- 7. ΑΠΛΟΣ ΥΠΟΛΟΓΙΣΜΟΣ (Βρίσκει το φθηνότερο προϊόν) ---
+function findCheapestPrice(searchTerms) {
+    let cheapest = { price: Infinity, store: '', productName: '' };
 
-    item.search.forEach(term => {
+    searchTerms.forEach(term => {
         const lowerTerm = term.toLowerCase();
         
         productsData.forEach(product => {
@@ -152,27 +151,12 @@ function findCheapestPrice(item) {
                 
                 pPrices.forEach(pr => {
                     if (selectedStores.includes(pr.retailer_name)) {
-                        let calculatedCost = pr.price;
-
-                        // Αν ζητάμε κιλά ή λίτρα και το API έχει τιμή ανά μονάδα (price_per_unit)
-                        if ((item.unit === 'kg' || item.unit === 'L') && pr.price_per_unit) {
-                            const prodUnit = product.unit ? product.unit.toLowerCase() : '';
-                            
-                            // Ελέγχουμε αν η μονάδα του προϊόντος συμφωνεί με την αναζήτηση
-                            if (prodUnit === item.unit || (item.unit === 'kg' && prodUnit === 'gr') || (item.unit === 'L' && prodUnit === 'ml')) {
-                                calculatedCost = pr.price_per_unit * item.target;
-                            }
-                        } else if (item.unit === 'τεμ') {
-                            // Για τεμάχια πολλαπλασιάζουμε την τιμή του προϊόντος επί την ποσότητα
-                            calculatedCost = pr.price * item.target;
-                        }
-
-                        // Αν το υπολογισμένο κόστος είναι το φθηνότερο, το κρατάμε
-                        if (calculatedCost < bestOption.total_price) {
-                            bestOption = {
-                                total_price: calculatedCost,
-                                store: pr.retailer_name,
-                                productName: product.name
+                        // Παίρνουμε απλώς την τιμή του προϊόντος
+                        if (pr.price < cheapest.price) {
+                            cheapest = { 
+                                price: pr.price, 
+                                store: pr.retailer_name, 
+                                productName: product.name 
                             };
                         }
                     }
@@ -181,7 +165,7 @@ function findCheapestPrice(item) {
         });
     });
     
-    return bestOption;
+    return cheapest;
 }
 
 function calculateCosts() {
@@ -190,18 +174,19 @@ function calculateCosts() {
     if (!listContainer) return;
     
     listContainer.innerHTML = shoppingListTemplate.map(item => {
-        const best = findCheapestPrice(item);
+        const best = findCheapestPrice(item.search);
         
-        if (best.total_price !== Infinity) {
-            total += best.total_price;
+        if (best.price !== Infinity) {
+            total += best.price;
+            // Εδώ προσθέτουμε το best.productName για να βλέπεις τι ακριβώς προϊόν είναι
             return `
                 <div class="shopping-item">
                     <div class="item-info">
-                        <strong>${item.name}</strong>
-                        <small>${item.qty}</small>
+                        <strong>${item.name} (${item.qty})</strong>
+                        <small>${best.productName}</small>
                     </div>
                     <div class="item-price">
-                        <span class="price-tag">${best.total_price.toFixed(2)}€</span>
+                        <span class="price-tag">${best.price.toFixed(2)}€</span>
                         <span class="store-tag">${best.store}</span>
                     </div>
                 </div>
@@ -210,8 +195,7 @@ function calculateCosts() {
             return `
                 <div class="shopping-item">
                     <div class="item-info">
-                        <strong>${item.name}</strong>
-                        <small>${item.qty}</small>
+                        <strong>${item.name} (${item.qty})</strong>
                     </div>
                     <div class="item-price">
                         <span style="color:#ff5252; font-size:0.8em;">Μη διαθέσιμο</span>
