@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-24T04:21+00:00",
+ "updated": "2026-10-25T04:24+00:00",
  "offers": [
   {
    "title": "Ορχιδέα",
@@ -110,6 +110,16 @@
    "pack_g": 600.0,
    "price_kg": 3.32,
    "url": "https://www.lidl-hellas.gr/p/harvest-basket-patates-duchesse/p11030579"
+  },
+  {
+   "title": "DELUXE Εκλεκτή σάλτσα τομάτας για ζυμαρικά ποικιλία",
+   "price": null,
+   "packaging": "",
+   "when": "Στο κατάστημα",
+   "loose": false,
+   "pack_g": null,
+   "price_kg": null,
+   "url": "https://www.lidl-hellas.gr/p/deluxe-eklekti-saltsa-tomatas-gia-zymarika-poikilia/p11029291"
   },
   {
    "title": "Ελιές",
@@ -1070,56 +1080,6 @@
    "pack_g": 300.0,
    "price_kg": 6.3,
    "url": "https://www.lidl-hellas.gr/p/el-tequito-snak-tortilla/p11008794"
-  },
-  {
-   "title": "NIXE Tόνος (Φιλέτα τόνου σε νερό)",
-   "price": 2.09,
-   "packaging": "3 x 80 g (3 x 56 g)",
-   "when": "μόνο στο κατάστημα",
-   "loose": false,
-   "pack_g": 408.0,
-   "price_kg": 12.44,
-   "url": "https://www.lidl-hellas.gr/p/nixe-tonos/p11006750001"
-  },
-  {
-   "title": "Αγγούρια ελληνικά",
-   "price": 0.41,
-   "packaging": "Το τεμάχιο",
-   "when": "μόνο στο κατάστημα",
-   "loose": false,
-   "pack_g": null,
-   "price_kg": null,
-   "url": "https://www.lidl-hellas.gr/p/aggoyria-ellinika/p11151055"
-  },
-  {
-   "title": "Πυρηνέλαιο",
-   "price": null,
-   "packaging": "",
-   "when": "μόνο στο κατάστημα",
-   "loose": false,
-   "pack_g": null,
-   "price_kg": null,
-   "url": "https://www.lidl-hellas.gr/p/pyrinelaio/p11526868"
-  },
-  {
-   "title": "SNACK DAY Τσιπς ποικιλία",
-   "price": 1.49,
-   "packaging": "Κάθε συσκ. 170 g",
-   "when": "μόνο στο κατάστημα",
-   "loose": false,
-   "pack_g": 170.0,
-   "price_kg": 8.76,
-   "url": "https://www.lidl-hellas.gr/p/snack-day-tsips-poikilia/p11029245"
-  },
-  {
-   "title": "BELBAKE Αμύγδαλα ωμά",
-   "price": 1.95,
-   "packaging": "200 g",
-   "when": "μόνο στο κατάστημα",
-   "loose": false,
-   "pack_g": 200.0,
-   "price_kg": 9.75,
-   "url": "https://www.lidl-hellas.gr/p/belbake-amygdala-oma/p11009576"
   },
   {
    "title": "Φιλέτο μπούτι κοτόπουλο Ελλάδας XXL",
@@ -2112,14 +2072,14 @@
    "url": "https://www.lidl-hellas.gr/p/favorina-koyrampiedes-n-karvalis/p11526448"
   },
   {
-   "title": "ERIDANOUS Μελομακάρονα",
+   "title": "Favorina Μελομακάρονα",
    "price": 7.49,
    "packaging": "960 g",
    "when": "Στο κατάστημα",
    "loose": false,
    "pack_g": 960.0,
    "price_kg": 7.8,
-   "url": "https://www.lidl-hellas.gr/p/eridanous-melomakarona/p11150026"
+   "url": "https://www.lidl-hellas.gr/p/favorina-melomakarona/p11150026"
   },
   {
    "title": "Favorina Γεμιστά σοκολατάκια με φιστίκι",
@@ -2222,7 +2182,7 @@
    "url": "https://www.lidl-hellas.gr/p/favorina-mpiskota-me-mpacarika/p11001812"
   },
   {
-   "title": "Favorina Μπισκότα βουτύρου ποικιλία",
+   "title": "FAVORINA Μπισκότα βουτύρου ποικιλία",
    "price": 3.19,
    "packaging": "Κάθε συσκ. 300 g",
    "when": "Στο κατάστημα",
