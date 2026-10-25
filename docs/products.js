@@ -1,85 +1,59 @@
 let allProducts = [];
 
+// Όταν φορτώνει η σελίδα, τραβάμε τα δεδομένα
+document.addEventListener('DOMContentLoaded', () => {
+    loadData();
+});
+
 async function loadData() {
     try {
         const [prodRes, priceRes] = await Promise.all([
             fetch('data/products.json'),
             fetch('data/prices.json')
         ]);
-        
-        if (!prodRes.ok || !priceRes.ok) {
-            throw new Error("Δεν βρέθηκαν τα αρχεία JSON");
-        }
-
         const products = await prodRes.json();
         const prices = await priceRes.json();
         
-        console.log("Φορτώθηκαν προϊόντα:", products.length);
-        
         allProducts = products.map(p => ({ ...p, prices: prices[p.id] || [] }));
         
-        // Καλούμε τη συνάρτηση για να γεμίσει το μενού
-        populateStores();
+        // Γεμίζουμε το dropdown με τα καταστήματα
+        populateDropdown();
         
-        // Εμφανίζουμε όλα τα προϊόντα αρχικά
-        applyFilters();
+        // Εμφανίζουμε όλα τα προϊόντα
+        renderResults(allProducts);
         
     } catch (error) {
+        document.getElementById('results').innerHTML = '<div class="loading">Σφάλμα φόρτωσης δεδομένων.</div>';
         console.error(error);
-        document.getElementById('results').innerHTML = '<div class="loading">Σφάλμα φόρτωσης δεδομένων. Ελέγξτε αν τα JSON είναι στον φάκελο data.</div>';
     }
 }
 
-function populateStores() {
-    const storeFilter = document.getElementById('storeFilter');
-    const storesSet = new Set();
+function populateDropdown() {
+    const select = document.getElementById('storeFilter');
+    const uniqueStores = new Set();
     
-    // Συλλογή όλων των μοναδικών ονομάτων καταστημάτων
-    allProducts.forEach(p => {
-        if (p.prices && Array.isArray(p.prices)) {
-            p.prices.forEach(pr => {
-                if (pr.retailer_name) {
-                    storesSet.add(pr.retailer_name.trim());
-                }
+    // Βρίσκουμε όλα τα μοναδικά καταστήματα
+    allProducts.forEach(product => {
+        if (product.prices) {
+            product.prices.forEach(price => {
+                if (price.retailer_name) uniqueStores.add(price.retailer_name);
             });
         }
     });
 
-    const sortedStores = Array.from(storesSet).sort();
-    console.log("Βρέθηκαν καταστήματα:", sortedStores);
-
-    // Καθαρισμός και επαναφορά της λίστας
-    storeFilter.innerHTML = '<option value="all">Όλα τα καταστήματα</option>';
+    // Τα ταξινομούμε αλφαβητικά
+    const sortedStores = Array.from(uniqueStores).sort();
     
+    // Καθαρίζουμε το dropdown και βάζουμε την προεπιλογή
+    select.innerHTML = '<option value="all">Όλα τα καταστήματα</option>';
+    
+    // Προσθέτουμε κάθε κατάστημα
     sortedStores.forEach(storeName => {
         const option = document.createElement('option');
         option.value = storeName;
         option.textContent = storeName;
-        storeFilter.appendChild(option);
+        select.appendChild(option);
     });
-}
-
-function applyFilters() {
-    const term = document.getElementById('search').value.toLowerCase();
-    const selectedStore = document.getElementById('storeFilter').value;
-
-    const filtered = allProducts.map(p => {
-        let filteredPrices = p.prices;
-        if (selectedStore !== 'all') {
-            filteredPrices = p.prices.filter(pr => pr.retailer_name === selectedStore);
-        }
-        return { ...p, filteredPrices: filteredPrices };
-    }).filter(p => {
-        const matchesSearch = 
-            (p.name && p.name.toLowerCase().includes(term)) || 
-            (p.brand && p.brand.toLowerCase().includes(term)) ||
-            (p.category && p.category.toLowerCase().includes(term));
-            
-        const hasPrice = p.filteredPrices.length > 0;
-        return matchesSearch && hasPrice;
-    });
-
-    renderResults(filtered);
 }
 
 function renderResults(items) {
@@ -90,13 +64,18 @@ function renderResults(items) {
     }
     
     const html = items.map(p => {
-        const sortedPrices = p.filteredPrices.sort((a, b) => a.price - b.price);
+        let storesHtml = '<div style="color:#999; font-size:0.9em;">Δεν υπάρχουν τιμές.</div>';
         
-        const storesHtml = `<div class="stores">` + sortedPrices.map(pr => {
-            const discountClass = pr.is_discount ? ' discount' : '';
-            const unitStr = pr.price_per_unit ? ` <span class="unit-price">(${pr.price_per_unit.toFixed(2)} / ${p.unit || 'τεμ'})</span>` : '';
-            return `<div class="store-badge${discountClass}">${pr.retailer_name}: <span class="price">${pr.price.toFixed(2)}€</span>${unitStr}</div>`;
-        }).join('') + `</div>`;
+        if (p.prices && p.prices.length > 0) {
+            // Ταξινόμηση τιμών
+            const sortedPrices = p.prices.sort((a, b) => a.price - b.price);
+            
+            storesHtml = `<div class="stores">` + sortedPrices.map(pr => {
+                const discountClass = pr.is_discount ? ' discount' : '';
+                const unitStr = pr.price_per_unit ? ` <span class="unit-price">(${pr.price_per_unit.toFixed(2)} / ${p.unit || 'τεμ'})</span>` : '';
+                return `<div class="store-badge${discountClass}">${pr.retailer_name}: <span class="price">${pr.price.toFixed(2)}€</span>${unitStr}</div>`;
+            }).join('') + `</div>`;
+        }
         
         const privateLabel = p.private_label ? '<span style="color: #28a745; font-size:0.8em;">(Ιδιωτική Ετικέτα)</span>' : '';
         
@@ -110,7 +89,41 @@ function renderResults(items) {
     container.innerHTML = html;
 }
 
-document.getElementById('search').addEventListener('input', applyFilters);
-document.getElementById('storeFilter').addEventListener('change', applyFilters);
+// Όταν αλλάζει το dropdown ή γράφουμε στο search, φιλτράρουμε
+document.getElementById('storeFilter').addEventListener('change', (e) => {
+    const selectedStore = e.target.value;
+    const searchTerm = document.getElementById('search').value.toLowerCase();
+    
+    const filtered = allProducts.map(p => {
+        // Αν διαλέξαμε κατάστημα, κρατάμε μόνο τις τιμές του
+        let filteredPrices = p.prices;
+        if (selectedStore !== 'all') {
+            filteredPrices = p.prices.filter(pr => pr.retailer_name === selectedStore);
+        }
+        return { ...p, prices: filteredPrices };
+    }).filter(p => {
+        // Έλεγχος αναζήτησης
+        const matchesSearch = 
+            (p.name && p.name.toLowerCase().includes(searchTerm)) || 
+            (p.brand && p.brand.toLowerCase().includes(searchTerm)) ||
+            (p.category && p.category.toLowerCase().includes(searchTerm));
+            
+        // Έλεγχος αν έχει τιμή (αν διαλέξαμε κατάστημα)
+        const hasPrice = selectedStore === 'all' || p.prices.length > 0;
+        
+        return matchesSearch && hasPrice;
+    });
+    
+    renderResults(filtered);
+});
 
-loadData();
+// Αναζήτηση
+document.getElementById('search').addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    const filtered = allProducts.filter(p => 
+        (p.name && p.name.toLowerCase().includes(term)) || 
+        (p.brand && p.brand.toLowerCase().includes(term)) ||
+        (p.category && p.category.toLowerCase().includes(term))
+    );
+    renderResults(filtered);
+});
