@@ -41,7 +41,7 @@
         h1 { color: var(--text-main); margin-bottom: 5px; }
         .subtitle { color: var(--text-muted); font-size: 0.9em; margin-bottom: 20px; }
         
-        .theme-toggle { position: absolute; top: 0; right: 0; background: var(--surface-color); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 1em; box-shadow: var(--card-shadow); transition: 0.3s; }
+        .theme-toggle { position: absolute; top: 0; right: 0; background: var(--surface-color); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 12px; border-radius: 50%; cursor: pointer; font-size: 1.2em; box-shadow: var(--card-shadow); transition: 0.3s; display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; }
         .theme-toggle:hover { background: var(--border-color); }
 
         /* Store Selector */
@@ -86,7 +86,8 @@
 <body>
     <div class="container">
         <header>
-            <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">☀️ Φωτεινό</button>
+            <!-- Άλλαξε σε μόνο εικονίδιο -->
+            <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">☀️</button>
             <h1>🍲 Έξυπνο Πλάνο Γευμάτων</h1>
             <div class="subtitle">Οργάνωσε το μενού της εβδομάδας και βρες πού θα ψωνίσεις φθηνότερα.</div>
         </header>
