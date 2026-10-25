@@ -60,13 +60,13 @@
 
         .shopping-card { background: var(--surface-color); border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); box-shadow: var(--card-shadow); position: sticky; top: 20px; transition: 0.3s; }
         .shopping-card h2 { margin-top: 0; color: var(--text-main); font-size: 1.2em; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
-        .shopping-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed var(--border-color); }
+        
+        /* Νέο στυλ για τις προτάσεις αγορών */
+        .shopping-item { padding: 12px 0; border-bottom: 1px dashed var(--border-color); }
         .shopping-item:last-child { border-bottom: none; }
-        .item-info strong { display: block; color: var(--text-main); font-size: 1em; }
-        .item-info small { color: var(--text-muted); font-size: 0.85em; display: block; margin-top: 2px; }
-        .item-price { text-align: right; }
-        .price-tag { color: var(--primary-color); font-weight: bold; font-size: 1.2em; display: block; }
-        .store-tag { font-size: 0.75em; color: #fff; background: #555; padding: 2px 8px; border-radius: 12px; display: inline-block; margin-top: 4px; }
+        .shopping-text { font-size: 1em; color: var(--text-main); }
+        .shopping-highlight { color: var(--primary-color); font-weight: bold; }
+        .shopping-sub { font-size: 0.85em; color: var(--text-muted); margin-top: 4px; display: block; }
 
         .btn-print { background: var(--primary-color); color: var(--btn-text); border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-size: 1em; width: 100%; margin-top: 20px; font-weight: bold; transition: 0.2s; }
         .btn-print:hover { opacity: 0.9; }
@@ -94,7 +94,7 @@
             <div class="meal-plan-column" id="meal-plan"></div>
             <div class="shopping-column">
                 <div class="shopping-card">
-                    <h2>🛒 Λίστα Αγορών</h2>
+                    <h2>🛒 Οδηγίες Αγορών</h2>
                     <div id="shopping-list-items"></div>
                     <button class="btn-print" onclick="window.print()">Εκτύπωση / PDF</button>
                 </div>
