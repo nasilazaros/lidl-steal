@@ -1,3 +1,5 @@
+console.log("Η εφαρμογή φορτώθηκε σωστά!");
+
 // --- 1. ΔΕΔΟΜΕΝΑ ΣΥΝΤΑΓΩΝ ---
 const mealPlan = [
     { day: "Δευτέρα", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Λουκάνικα με πιπεριές και πατάτες", dinner: "Τοστ με τυρί και γαλοπούλα" },
@@ -9,27 +11,27 @@ const mealPlan = [
     { day: "Κυριακή", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Φακές σούπα", dinner: "Τοστ με τυρί και γαλοπούλα" }
 ];
 
-// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ (Έβαλα πιο γενικές λέξεις για να βρίσκει περισσότερα) ---
+// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ (Πολλαπλές λέξεις αναζήτησης) ---
 const shoppingListTemplate = [
-    { name: "Γάλα", qty: "2 L", search: "γάλα" },
-    { name: "Δημητριακά (Κορνφλέικς)", qty: "1 πακέτο", search: "δημητριακά" },
-    { name: "Ψωμί για τοστ", qty: "1 πακέτο", search: "ψωμί" },
-    { name: "Τυρί", qty: "500g", search: "τυρί" },
-    { name: "Γαλοπούλα", qty: "300g", search: "γαλοπούλα" },
-    { name: "Λουκάνικα", qty: "600g", search: "λουκάνικα" },
-    { name: "Πατάτες", qty: "1.2 kg", search: "πατάτα" },
-    { name: "Πιπεριές", qty: "400g", search: "πιπεριά" },
-    { name: "Ρεβίθια", qty: "500g", search: "ρεβίθια" },
-    { name: "Κρεμμύδια", qty: "500g", search: "κρεμμύδι" },
-    { name: "Λεμόνια", qty: "4 τεμ", search: "λεμόνι" },
-    { name: "Κοτόπουλο", qty: "1 kg", search: "κοτόπουλο" },
-    { name: "Ρύζι", qty: "500g", search: "ρύζι" },
-    { name: "Καρότα", qty: "500g", search: "καρότο" },
-    { name: "Φακές", qty: "500g", search: "φακές" },
-    { name: "Τομάτα τριμμένη", qty: "400g", search: "τομάτα" },
-    { name: "Ελαιόλαδο", qty: "1 L", search: "ελαιόλαδο" },
-    { name: "Μπανάνες", qty: "5 τεμ", search: "μπανάνα" },
-    { name: "Μήλα", qty: "5 τεμ", search: "μήλο" }
+    { name: "Γάλα", qty: "2 L", search: ["γάλα"] },
+    { name: "Δημητριακά (Κορνφλέικς)", qty: "1 πακέτο", search: ["δημητριακά", "κορνφλέικς", "corn flakes", "δημ"] },
+    { name: "Ψωμί για τοστ", qty: "1 πακέτο", search: ["ψωμί", "toast", "σάντουιτς", "άρτος"] },
+    { name: "Τυρί", qty: "500g", search: ["τυρί", "κασέρι", "φέτα"] },
+    { name: "Γαλοπούλα", qty: "300g", search: ["γαλοπούλα", "αλλαντικό", "ζαμπόν"] },
+    { name: "Λουκάνικα", qty: "600g", search: ["λουκάνικα", "αλλαντικό"] },
+    { name: "Πατάτες", qty: "1.2 kg", search: ["πατάτα", "πατάτες"] },
+    { name: "Πιπεριές", qty: "400g", search: ["πιπεριά", "πιπεριές"] },
+    { name: "Ρεβίθια", qty: "500g", search: ["ρεβίθια", "όσπρια"] },
+    { name: "Κρεμμύδια", qty: "500g", search: ["κρεμμύδι", "κρεμμύδια"] },
+    { name: "Λεμόνια", qty: "4 τεμ", search: ["λεμόνι", "λεμόνια"] },
+    { name: "Κοτόπουλο", qty: "1 kg", search: ["κοτόπουλο", "κοτόπουλα"] },
+    { name: "Ρύζι", qty: "500g", search: ["ρύζι"] },
+    { name: "Καρότα", qty: "500g", search: ["καρότο", "καρότα"] },
+    { name: "Φακές", qty: "500g", search: ["φακές", "όσπρια"] },
+    { name: "Τομάτα τριμμένη", qty: "400g", search: ["τομάτα", "ντομάτα", "σάλτσα"] },
+    { name: "Ελαιόλαδο", qty: "1 L", search: ["ελαιόλαδο", "λάδι"] },
+    { name: "Μπανάνες", qty: "5 τεμ", search: ["μπανάνα", "μπανάνες"] },
+    { name: "Μήλα", qty: "5 τεμ", search: ["μήλο", "μήλα"] }
 ];
 
 let availableStores = [];
@@ -37,7 +39,7 @@ let selectedStores = [];
 let productsData = [];
 let pricesData = {};
 
-// --- 3. ΔΙΑΧΕΙΡΙΣΗ ΘΕΜΑΤΟΣ (DARK / LIGHT) ---
+// --- 3. ΔΙΑΧΕΙΡΙΣΗ ΘΕΜΑΤΟΣ ---
 function initTheme() {
     const savedTheme = localStorage.getItem('theme');
     const toggleBtn = document.getElementById('theme-toggle');
@@ -45,10 +47,10 @@ function initTheme() {
     
     if (savedTheme === 'light') {
         document.body.classList.add('light-mode');
-        toggleBtn.innerText = '🌙 Σκούρο';
+        toggleBtn.textContent = '🌙';
     } else {
         document.body.classList.remove('light-mode');
-        toggleBtn.innerText = '☀️ Φωτεινό';
+        toggleBtn.textContent = '☀️';
     }
 }
 
@@ -59,7 +61,7 @@ window.toggleTheme = function() {
     
     const toggleBtn = document.getElementById('theme-toggle');
     if (toggleBtn) {
-        toggleBtn.innerText = isLight ? '🌙 Σκούρο' : '☀️ Φωτεινό';
+        toggleBtn.textContent = isLight ? '🌙' : '☀️';
     }
 };
 
@@ -139,22 +141,26 @@ function renderMealPlan() {
 }
 
 // --- 7. ΕΞΥΠΝΟΣ ΥΠΟΛΟΓΙΣΜΟΣ ΚΟΣΤΟΥΣ ---
-function findCheapestPrice(searchTerm) {
+function findCheapestPrice(searchTerms) {
     let cheapest = { price: Infinity, store: '', productName: '' };
-    const term = searchTerm.toLowerCase();
 
-    productsData.forEach(product => {
-        if (product.name && product.name.toLowerCase().includes(term)) {
-            const pPrices = pricesData[product.id] || [];
-            pPrices.forEach(pr => {
-                if (selectedStores.includes(pr.retailer_name)) {
-                    if (pr.price < cheapest.price) {
-                        cheapest = { price: pr.price, store: pr.retailer_name, productName: product.name };
+    searchTerms.forEach(term => {
+        const lowerTerm = term.toLowerCase();
+        
+        productsData.forEach(product => {
+            if (product.name && product.name.toLowerCase().includes(lowerTerm)) {
+                const pPrices = pricesData[product.id] || [];
+                pPrices.forEach(pr => {
+                    if (selectedStores.includes(pr.retailer_name)) {
+                        if (pr.price < cheapest.price) {
+                            cheapest = { price: pr.price, store: pr.retailer_name, productName: product.name };
+                        }
                     }
-                }
-            });
-        }
+                });
+            }
+        });
     });
+    
     return cheapest;
 }
 
