@@ -138,9 +138,9 @@ function renderMealPlan() {
     `).join('');
 }
 
-// --- 7. ΕΞΥΠΝΟΣ ΥΠΟΛΟΓΙΣΜΟΣ (Χρησιμοποιεί την τιμή ανά κιλό/λίτρο) ---
+// --- 7. ΕΞΥΠΝΟΣ ΥΠΟΛΟΓΙΣΜΟΣ ---
 function findCheapestPrice(searchTerms) {
-    let cheapest = { price: Infinity, store: '', unit: '' };
+    let cheapest = { price: Infinity, store: '', productName: '', unit: '' };
 
     searchTerms.forEach(term => {
         const lowerTerm = term.toLowerCase();
@@ -151,14 +151,19 @@ function findCheapestPrice(searchTerms) {
                 
                 pPrices.forEach(pr => {
                     if (selectedStores.includes(pr.retailer_name)) {
-                        // Χρησιμοποιούμε το price_per_unit (τιμή ανά κιλό/λίτρο) για σωστή σύγκριση
-                        // Αν δεν υπάρχει, χρησιμοποιούμε την κανονική τιμή
-                        const comparePrice = (pr.price_per_unit && pr.price_per_unit > 0) ? pr.price_per_unit : pr.price;
+                        let comparePrice = pr.price;
+                        if (pr.price_per_unit && pr.price_per_unit > 0.2) {
+                            comparePrice = pr.price_per_unit;
+                        }
                         
+                        // ΦΙΛΤΡΟ ΑΣΦΑΛΕΙΑΣ: Αγνοούμε τιμές κάτω από 0.20€
+                        if (comparePrice < 0.2) return;
+
                         if (comparePrice < cheapest.price) {
                             cheapest = { 
-                                price: comparePrice, 
+                                price: pr.price, 
                                 store: pr.retailer_name, 
+                                productName: product.name,
                                 unit: product.unit || 'τεμ'
                             };
                         }
@@ -184,10 +189,10 @@ function calculateCosts() {
             return `
                 <div class="shopping-item">
                     <div class="shopping-text">
-                        Πάρε <span class="shopping-highlight">${item.name}</span> από <span class="shopping-highlight">${best.store}</span> γιατί έχει την χαμηλότερη τιμή.
+                        Πάρε <span class="shopping-highlight">${item.name} (${item.qty})</span> από <span class="shopping-highlight">${best.store}</span> γιατί έχει την χαμηλότερη τιμή.
                     </div>
                     <span class="shopping-sub">
-                        (Τιμή: ${best.price.toFixed(2)}€ / ${best.unit})
+                        (${best.productName} - ${best.price.toFixed(2)}€)
                     </span>
                 </div>
             `;
