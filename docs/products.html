@@ -8,9 +8,9 @@
         body { font-family: system-ui, -apple-system, sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
         .container { max-width: 1000px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         h1 { color: #333; text-align: center; }
-        .filters { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .filters { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
         #search { flex: 1; min-width: 200px; padding: 12px; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        #storeFilter { padding: 12px; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; background-color: white; cursor: pointer; }
+        #storeFilter { padding: 12px; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; background-color: white; cursor: pointer; min-width: 200px; }
         .product-card { border-bottom: 1px solid #eee; padding: 15px 0; }
         .product-title { font-weight: bold; font-size: 1.1em; color: #222; }
         .product-meta { font-size: 0.9em; color: #666; margin-bottom: 10px; }
@@ -30,7 +30,6 @@
             <input type="text" id="search" placeholder="Αναζήτηση προϊόντος (π.χ. γάλα, ψωμί)...">
             <select id="storeFilter">
                 <option value="all">Όλα τα καταστήματα</option>
-                <!-- Οι επιλογές θα γεμίσουν αυτόματα από το JavaScript -->
             </select>
         </div>
 
