@@ -65,9 +65,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     initTheme(); // Ελέγχουμε το θέμα μόλις φορτώσει η σελίδα
     
     try {
+        // ΕΔΩ ΕΙΝΑΙ Η ΔΙΟΡΘΩΣΗ: Βάλαμε το data/ μπροστά
         const [prodRes, priceRes] = await Promise.all([
-            fetch('products.json'),
-            fetch('prices.json')
+            fetch('data/products.json'),
+            fetch('data/prices.json')
         ]);
         
         if(!prodRes.ok || !priceRes.ok) throw new Error("JSON not found");
