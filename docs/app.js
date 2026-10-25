@@ -12,7 +12,7 @@ const mealPlan = [
 // --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ ---
 const shoppingListTemplate = [
     { name: "Γάλα", qty: "2 L", search: ["γάλα"] },
-    { name: "Δημητριακά (Κορνφλέικς)", qty: "1 πακέτο", search: ["δημητριακά", "κορνφλέικς"] },
+    { name: "Δημητριακά", qty: "1 πακέτο", search: ["δημητριακά", "κορνφλέικς"] },
     { name: "Ψωμί για τοστ", qty: "1 πακέτο", search: ["ψωμί", "toast"] },
     { name: "Τυρί", qty: "500g", search: ["τυρί", "κασέρι", "φέτα"] },
     { name: "Γαλοπούλα", qty: "300g", search: ["γαλοπούλα", "ζαμπόν"] },
@@ -36,6 +36,7 @@ let availableStores = [];
 let selectedStores = [];
 let productsData = [];
 let pricesData = {};
+let userSelections = {}; // Εδώ κρατάμε τι διάλεξε ο χρήστης
 
 // --- 3. ΔΙΑΧΕΙΡΙΣΗ ΘΕΜΑΤΟΣ ---
 function initTheme() {
@@ -90,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         renderStoreFilters();
         renderMealPlan();
-        calculateCosts();
+        generateShoppingList(); // Εδώ φτιάχνουμε τη λίστα
 
     } catch (e) {
         console.error("Σφάλμα:", e);
@@ -106,7 +107,7 @@ function renderStoreFilters() {
     
     grid.innerHTML = availableStores.map(store => `
         <label class="store-checkbox">
-            <input type="checkbox" value="${store}" checked onchange="toggleStore(this)">
+            <input type="checkbox" value="${store}" ${selectedStores.includes(store) ? 'checked' : ''} onchange="toggleStore(this)">
             ${store}
         </label>
     `).join('');
@@ -119,7 +120,7 @@ window.toggleStore = function(checkbox) {
     } else {
         selectedStores = selectedStores.filter(s => s !== store);
     }
-    calculateCosts();
+    generateShoppingList(); // Ξαναφτιάχνουμε τη λίστα με τα νέα καταστήματα
 };
 
 // --- 6. ΕΜΦΑΝΙΣΗ ΠΛΑΝΟΥ ---
@@ -138,15 +139,22 @@ function renderMealPlan() {
     `).join('');
 }
 
-// --- 7. ΕΞΥΠΝΟΣ ΥΠΟΛΟΓΙΣΜΟΣ ---
-function findCheapestPrice(searchTerms) {
-    let cheapest = { price: Infinity, store: '', productName: '', unit: '' };
+// --- 7. ΔΗΜΙΟΥΡΓΙΑ ΛΙΣΤΑΣ ΜΕ ΕΠΙΛΟΓΕΣ (DROPDOWN) ---
+function getAllOptions(searchTerms) {
+    let options = [];
+    const blacklist = ["σκύλο", "γάτα", "ζώα", "ζώων", "κατοικίδι", "πουρέ", "πίτα", "πίτσα", "σάντουιτς", "σαλάτα", "σούπα", "έτοιμο", "μαγειρευτό", "τροφή"];
+    const seen = new Set(); // Για να μην έχουμε διπλότυπα
 
     searchTerms.forEach(term => {
         const lowerTerm = term.toLowerCase();
         
         productsData.forEach(product => {
-            if (product.name && product.name.toLowerCase().includes(lowerTerm)) {
+            const prodName = (product.name || "").toLowerCase();
+            
+            if (prodName.includes(lowerTerm)) {
+                const isBad = blacklist.some(badWord => prodName.includes(badWord));
+                if (isBad) return;
+
                 const pPrices = pricesData[product.id] || [];
                 
                 pPrices.forEach(pr => {
@@ -156,16 +164,19 @@ function findCheapestPrice(searchTerms) {
                             comparePrice = pr.price_per_unit;
                         }
                         
-                        // ΦΙΛΤΡΟ ΑΣΦΑΛΕΙΑΣ: Αγνοούμε τιμές κάτω από 0.20€
                         if (comparePrice < 0.2) return;
 
-                        if (comparePrice < cheapest.price) {
-                            cheapest = { 
+                        // Μοναδικό κλειδί για να μην εμφανίζεται το ίδιο προϊόν 2 φορές
+                        const uniqueKey = product.name + "_" + pr.retailer_name;
+                        if (!seen.has(uniqueKey)) {
+                            seen.add(uniqueKey);
+                            options.push({ 
+                                displayName: `${product.name} - ${pr.price.toFixed(2)}€ (${pr.retailer_name})`,
                                 price: pr.price, 
                                 store: pr.retailer_name, 
                                 productName: product.name,
-                                unit: product.unit || 'τεμ'
-                            };
+                                comparePrice: comparePrice
+                            });
                         }
                     }
                 });
@@ -173,40 +184,77 @@ function findCheapestPrice(searchTerms) {
         });
     });
     
-    return cheapest;
+    // Ταξινόμηση με βάση την τιμή (από το φθηνότερο)
+    options.sort((a, b) => a.comparePrice - b.comparePrice);
+    return options;
 }
 
-function calculateCosts() {
-    let total = 0;
+function generateShoppingList() {
     const listContainer = document.getElementById('shopping-list-items');
     if (!listContainer) return;
-    
-    listContainer.innerHTML = shoppingListTemplate.map(item => {
-        const best = findCheapestPrice(item.search);
+
+    // Διατηρούμε τις παλιές επιλογές του χρήστη αν υπάρχουν
+    let html = shoppingListTemplate.map(item => {
+        const options = getAllOptions(item.search);
         
-        if (best.price !== Infinity) {
-            total += best.price;
-            return `
-                <div class="shopping-item">
-                    <div class="shopping-text">
-                        Πάρε <span class="shopping-highlight">${item.name} (${item.qty})</span> από <span class="shopping-highlight">${best.store}</span> γιατί έχει την χαμηλότερη τιμή.
-                    </div>
-                    <span class="shopping-sub">
-                        (${best.productName} - ${best.price.toFixed(2)}€)
-                    </span>
-                </div>
-            `;
+        let selectHtml = "";
+        if (options.length > 0) {
+            // Ελέγχουμε αν ο χρήστης είχε διαλέξει κάτι προηγουμένως, αλλιώς παίρνουμε το φθηνότερο (index 0)
+            let selectedIndex = 0; 
+            if (userSelections[item.name]) {
+                const foundIndex = options.findIndex(o => o.productName === userSelections[item.name].productName && o.store === userSelections[item.name].store);
+                if (foundIndex !== -1) selectedIndex = foundIndex;
+            } else {
+                // Αν δεν έχει διαλέξει, αποθηκεύουμε την προεπιλογή (το φθηνότερο)
+                userSelections[item.name] = options[0];
+            }
+
+            selectHtml = `<select class="product-select" onchange="handleSelection('${item.name}', this.value)">
+                ${options.map((opt, index) => `
+                    <option value="${index}" ${index === selectedIndex ? 'selected' : ''}>
+                        ${opt.displayName}
+                    </option>
+                `).join('')}
+            </select>`;
+            
+            // Αποθηκεύουμε τις επιλογές για να τις διαβάζει η handleSelection
+            item.availableOptions = options;
         } else {
-            return `
-                <div class="shopping-item">
-                    <div class="shopping-text">
-                        <span style="color:#ff5252;">Μη διαθέσιμο στα επιλεγμένα καταστήματα.</span>
-                    </div>
-                    <span class="shopping-sub">${item.name}</span>
-                </div>
-            `;
+            selectHtml = `<div style="color:#ff5252; font-size:0.9em; margin-top:5px;">Μη διαθέσιμο στα επιλεγμένα καταστήματα.</div>`;
         }
+
+        return `
+            <div class="shopping-item">
+                <div class="item-header">
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-qty">${item.qty}</span>
+                </div>
+                ${selectHtml}
+            </div>
+        `;
     }).join('');
+
+    listContainer.innerHTML = html;
+    updateTotals();
+}
+
+// --- 8. ΟΤΑΝ Ο ΧΡΗΣΤΗΣ ΑΛΛΑΖΕΙ ΕΠΙΛΟΓΗ ΑΠΟ ΤΟ DROPDOWN ---
+window.handleSelection = function(itemName, index) {
+    const itemTemplate = shoppingListTemplate.find(i => i.name === itemName);
+    if (itemTemplate && itemTemplate.availableOptions && itemTemplate.availableOptions[index]) {
+        userSelections[itemName] = itemTemplate.availableOptions[index];
+        updateTotals();
+    }
+};
+
+// --- 9. ΕΝΗΜΕΡΩΣΗ ΣΥΝΟΛΟΥ ---
+function updateTotals() {
+    let total = 0;
+    
+    // Προσθέτουμε όλες τις επιλογές του χρήστη
+    for (let key in userSelections) {
+        total += userSelections[key].price;
+    }
 
     const totalElement = document.getElementById('total-cost');
     const perDayElement = document.getElementById('cost-per-day');
