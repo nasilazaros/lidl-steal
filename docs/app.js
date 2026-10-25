@@ -9,7 +9,7 @@ const mealPlan = [
     { day: "Κυριακή", breakfast: "Κορνφλέικς με γάλα", snack: "1 μπανάνα", lunch: "Φακές σούπα", dinner: "Τοστ με τυρί και γαλοπούλα" }
 ];
 
-// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ (Τι ψάχνουμε στο API) ---
+// --- 2. ΛΙΣΤΑ ΑΓΟΡΩΝ ---
 const shoppingListTemplate = [
     { name: "Γάλα", qty: "2 L", search: "γάλα" },
     { name: "Κορνφλέικς", qty: "1 πακέτο", search: "κορνφλέικς" },
@@ -41,6 +41,7 @@ let pricesData = {};
 function initTheme() {
     const savedTheme = localStorage.getItem('theme');
     const toggleBtn = document.getElementById('theme-toggle');
+    if (!toggleBtn) return; // Ασφάλεια σε περίπτωση που δεν υπάρχει το κουμπί
     
     if (savedTheme === 'light') {
         document.body.classList.add('light-mode');
@@ -57,18 +58,20 @@ window.toggleTheme = function() {
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     
     const toggleBtn = document.getElementById('theme-toggle');
-    toggleBtn.innerText = isLight ? '🌙 Σκούρο' : '☀️ Φωτεινό';
+    if (toggleBtn) {
+        toggleBtn.innerText = isLight ? '🌙 Σκούρο' : '☀️ Φωτεινό';
+    }
 };
 
 // --- 4. ΦΟΡΤΩΣΗ ΚΑΙ ΕΚΚΙΝΗΣΗ ---
 document.addEventListener('DOMContentLoaded', async () => {
-    initTheme(); // Ελέγχουμε το θέμα μόλις φορτώσει η σελίδα
+    initTheme(); // Ξεκινάμε το θέμα πάντα πρώτο
     
     try {
-        // ΕΔΩ ΕΙΝΑΙ Η ΔΙΟΡΘΩΣΗ: Βάλαμε το data/ μπροστά
+        // Εδώ ψάχνουμε τα αρχεία ακριβώς στον ίδιο φάκελο (χωρίς data/)
         const [prodRes, priceRes] = await Promise.all([
-            fetch('data/products.json'),
-            fetch('data/prices.json')
+            fetch('products.json'),
+            fetch('prices.json')
         ]);
         
         if(!prodRes.ok || !priceRes.ok) throw new Error("JSON not found");
@@ -92,13 +95,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     } catch (e) {
         console.error("Σφάλμα:", e);
-        document.getElementById('total-cost').innerText = "Σφάλμα";
+        const costElement = document.getElementById('total-cost');
+        if (costElement) costElement.innerText = "Σφάλμα (Δεν βρέθηκαν τα JSON)";
     }
 });
 
 // --- 5. ΜΕΝΟΥ ΚΑΤΑΣΤΗΜΑΤΩΝ ---
 function renderStoreFilters() {
     const grid = document.getElementById('stores-grid');
+    if (!grid) return;
+    
     grid.innerHTML = availableStores.map(store => `
         <label class="store-checkbox">
             <input type="checkbox" value="${store}" checked onchange="toggleStore(this)">
@@ -120,6 +126,8 @@ window.toggleStore = function(checkbox) {
 // --- 6. ΕΜΦΑΝΙΣΗ ΠΛΑΝΟΥ ---
 function renderMealPlan() {
     const container = document.getElementById('meal-plan');
+    if (!container) return;
+
     container.innerHTML = mealPlan.map(day => `
         <div class="day-card">
             <div class="day-title">${day.day}</div>
@@ -154,6 +162,7 @@ function findCheapestPrice(searchTerm) {
 function calculateCosts() {
     let total = 0;
     const listContainer = document.getElementById('shopping-list-items');
+    if (!listContainer) return;
     
     listContainer.innerHTML = shoppingListTemplate.map(item => {
         const best = findCheapestPrice(item.search);
@@ -187,6 +196,9 @@ function calculateCosts() {
         }
     }).join('');
 
-    document.getElementById('total-cost').innerText = total.toFixed(2) + "€";
-    document.getElementById('cost-per-day').innerText = (total / 2 / 7).toFixed(2) + "€";
+    const totalElement = document.getElementById('total-cost');
+    const perDayElement = document.getElementById('cost-per-day');
+    
+    if (totalElement) totalElement.innerText = total.toFixed(2) + "€";
+    if (perDayElement) perDayElement.innerText = (total / 2 / 7).toFixed(2) + "€";
 }
