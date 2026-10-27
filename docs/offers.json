@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-26T04:28+00:00",
+ "updated": "2026-10-27T04:26+00:00",
  "offers": [
   {
    "title": "Ορχιδέα",
@@ -410,16 +410,6 @@
    "pack_g": 360.0,
    "price_kg": 19.42,
    "url": "https://www.lidl-hellas.gr/p/deluxe-salami-poikilia/p11144356"
-  },
-  {
-   "title": "DELUXE Νωπά ζυμαρικά γεμιστά (Tortelloni με σπανάκι)",
-   "price": 1.89,
-   "packaging": "Κάθε συσκ. 250g",
-   "when": "Στο κατάστημα",
-   "loose": false,
-   "pack_g": 250.0,
-   "price_kg": 7.56,
-   "url": "https://www.lidl-hellas.gr/p/deluxe-nopa-zymarika-gemista/p11101893012"
   },
   {
    "title": "DELUXE Zαμπόν ωρίμανσης Jamon Serrano Gran Reserva",
@@ -942,14 +932,14 @@
    "url": "https://www.lidl-hellas.gr/p/sondey-gkofreta-twin/p11531064"
   },
   {
-   "title": "CHRISOS MILOS Κατεψυγμένες πίτες",
+   "title": "CHEF SELECT Κατεψυγμένες πίτες",
    "price": 1.2,
    "packaging": "650g",
    "when": "Στο κατάστημα",
    "loose": false,
    "pack_g": 650.0,
    "price_kg": 1.85,
-   "url": "https://www.lidl-hellas.gr/p/chrisos-milos-katepygmenes-pites/p11278164"
+   "url": "https://www.lidl-hellas.gr/p/chef-select-katepygmenes-pites/p11278164"
   },
   {
    "title": "GLYKANTHI Χαλβάς βανίλια",
@@ -972,7 +962,7 @@
    "url": "https://www.lidl-hellas.gr/p/glykanthi-calvas-kakao/p11532365"
   },
   {
-   "title": "Confiserie Firenze Κέικ ρολό ποικιλία (Φράουλα)",
+   "title": "CONFISERIE FIRENZE Κέικ ρολό ποικιλία (Φράουλα)",
    "price": 2.15,
    "packaging": "400 g",
    "when": "μόνο στο κατάστημα 01.10. - 31.10.",
@@ -1142,27 +1132,27 @@
    "url": "https://www.lidl-hellas.gr/p/el-tequito-snak-tortilla/p11008794"
   },
   {
-   "title": "FORMIL Aπορρυπαντικό υγρό Μασσαλίας ποικιλία (Aπορρυπαντικό υγρό Μασσαλίας)",
-   "price": 4.29,
-   "packaging": "3 L",
-   "when": "μόνο στο κατάστημα από 31.10.",
-   "loose": false,
-   "pack_g": 3000.0,
-   "price_kg": 0.1,
-   "url": "https://www.lidl-hellas.gr/p/formil-aporrypantiko-ygro-massalias-poikilia/p11006854005"
-  },
-  {
    "title": "Ελληνικά σταφύλια λευκά άσπερμα",
-   "price": null,
-   "packaging": "",
+   "price": 1.69,
+   "packaging": "Συσκ. 500 g",
    "when": "μόνο στο κατάστημα από 31.10.",
    "loose": false,
-   "pack_g": null,
-   "price_kg": null,
+   "pack_g": 500.0,
+   "price_kg": 3.42,
    "url": "https://www.lidl-hellas.gr/p/ellinika-stafylia-leyka-asperma/p66000297"
   },
   {
-   "title": "ΚΑΡΔΙΣ Τυροπιτάκια στριφτά",
+   "title": "ΓΑΛΠΟ Γιαούρτι στραγγιστό 10%",
+   "price": 1.47,
+   "packaging": "3 x 200 g",
+   "when": "μόνο στο κατάστημα από 31.10.",
+   "loose": false,
+   "pack_g": 600.0,
+   "price_kg": 2.45,
+   "url": "https://www.lidl-hellas.gr/p/galpo-giaoyrti-straggisto-10/p11150036"
+  },
+  {
+   "title": "KARDIS Τυροπιτάκια στριφτά",
    "price": 2.55,
    "packaging": "1 Kg",
    "when": "μόνο στο κατάστημα από 31.10.",
@@ -1202,14 +1192,14 @@
    "url": "https://www.lidl-hellas.gr/p/cien-cartomantila-dipla/p11006457"
   },
   {
-   "title": "ΓΑΛΠΟ Γιαούρτι στραγγιστό 10%",
-   "price": 1.47,
-   "packaging": "3 x 200 g",
+   "title": "FORMIL Aπορρυπαντικό υγρό Μασσαλίας ποικιλία (Aπορρυπαντικό υγρό Μασσαλίας)",
+   "price": 4.29,
+   "packaging": "3 L",
    "when": "μόνο στο κατάστημα από 31.10.",
    "loose": false,
-   "pack_g": 600.0,
-   "price_kg": 2.45,
-   "url": "https://www.lidl-hellas.gr/p/galpo-giaoyrti-straggisto-10/p11150036"
+   "pack_g": 3000.0,
+   "price_kg": 0.07,
+   "url": "https://www.lidl-hellas.gr/p/formil-aporrypantiko-ygro-massalias-poikilia/p11006854005"
   },
   {
    "title": "Φιλέτο μπούτι κοτόπουλο Ελλάδας XXL",
@@ -2542,7 +2532,7 @@
    "url": "https://www.lidl-hellas.gr/p/kania-ketsap-xxl/p11534855"
   },
   {
-   "title": "Freeway Γκαζόζα ποικιλία (Γκαζόζα)",
+   "title": "FREEWAY Γκαζόζα ποικιλία (Γκαζόζα)",
    "price": 0.34,
    "packaging": "330 ml",
    "when": "μόνο στο κατάστημα από 29.10. - 04.11.",
@@ -2672,7 +2662,7 @@
    "url": "https://www.lidl-hellas.gr/p/favorina-siropiasta-se-tapaki/p11711120"
   },
   {
-   "title": "Favorina Αμυγδαλόπαστα",
+   "title": "FAVORINA Αμυγδαλόπαστα",
    "price": null,
    "packaging": "",
    "when": "Στο κατάστημα",
@@ -2682,7 +2672,7 @@
    "url": "https://www.lidl-hellas.gr/p/favorina-amygdalopasta/p11008471"
   },
   {
-   "title": "Favorina Μίνι Speculoos ποικιλία",
+   "title": "FAVORINA Μίνι Speculoos ποικιλία",
    "price": 2.19,
    "packaging": "200 g",
    "when": "Στο κατάστημα",
@@ -2882,7 +2872,7 @@
    "url": "https://www.lidl-hellas.gr/p/favorina-speculoos-me-sokolata/p11252029"
   },
   {
-   "title": "Favorina Λεπκούχεν",
+   "title": "FAVORINA Λεπκούχεν",
    "price": 4.99,
    "packaging": "Κάθε συσκ. 500 g",
    "when": "Στο κατάστημα",
@@ -3162,7 +3152,7 @@
    "url": "https://www.lidl-hellas.gr/p/snack-day-snack-mix-almyron/p11150157"
   },
   {
-   "title": "Confiserie Firenze Muffins",
+   "title": "CONFISERIE FIRENZE Muffins",
    "price": null,
    "packaging": "",
    "when": "μόνο στο κατάστημα 22.10. - 27.10.",
@@ -3222,14 +3212,14 @@
    "url": "https://www.lidl-hellas.gr/p/purio-sakoyles-aporrimmaton-60l-me-kordoni/p11473616"
   },
   {
-   "title": "ΓΑΛΠΟ Γιαούρτι στραγγιστό 0%",
+   "title": "MILBONA Γιαούρτι στραγγιστό 0%",
    "price": null,
    "packaging": "",
    "when": "μόνο στο κατάστημα από 29.10. - 04.11.",
    "loose": false,
    "pack_g": null,
    "price_kg": null,
-   "url": "https://www.lidl-hellas.gr/p/galpo-giaoyrti-straggisto-0/p11150020"
+   "url": "https://www.lidl-hellas.gr/p/milbona-giaoyrti-straggisto-0/p11150020"
   },
   {
    "title": "Τυρί κρέμα (Άλειμμα με φρέσκο τυρί κλασικό)",
@@ -3302,7 +3292,7 @@
    "url": "https://www.lidl-hellas.gr/p/harvest-basket-patates-tiganites/p11000716"
   },
   {
-   "title": "Confiserie Firenze Jumbo κέικ ποικιλία",
+   "title": "CONFISERIE FIRENZE Jumbo κέικ ποικιλία",
    "price": null,
    "packaging": "",
    "when": "μόνο στο κατάστημα από 29.10. - 04.11.",
@@ -3312,14 +3302,14 @@
    "url": "https://www.lidl-hellas.gr/p/confiserie-firenze-jumbo-keik-poikilia/p11069963"
   },
   {
-   "title": "MARIBEL Ταχίνι ολικής άλεσης",
+   "title": "GLYKANTHI Ταχίνι ολικής άλεσης",
    "price": null,
    "packaging": "",
    "when": "μόνο στο κατάστημα από 29.10. - 04.11.",
    "loose": false,
    "pack_g": null,
    "price_kg": null,
-   "url": "https://www.lidl-hellas.gr/p/maribel-tacini-olikis-alesis/p11531004"
+   "url": "https://www.lidl-hellas.gr/p/glykanthi-tacini-olikis-alesis/p11531004"
   },
   {
    "title": "MILBONA Τριγωνάκια",
@@ -3492,7 +3482,7 @@
    "url": "https://www.lidl-hellas.gr/p/portokalada/p11534224"
   },
   {
-   "title": "Confiserie Firenze Κέικ με επικάλυψη ποικιλία",
+   "title": "CONFISERIE FIRENZE Κέικ με επικάλυψη ποικιλία",
    "price": 1.59,
    "packaging": "Κάθε συσκ. 400 g",
    "when": "μόνο στο κατάστημα 26.10. - 27.10.",
@@ -3543,12 +3533,12 @@
   },
   {
    "title": "Κιμάς κοτόπουλο",
-   "price": 3.37,
-   "packaging": "450 g",
+   "price": null,
+   "packaging": "",
    "when": "μόνο στο κατάστημα από 02.11. - 04.11.",
    "loose": false,
-   "pack_g": 450.0,
-   "price_kg": 7.49,
+   "pack_g": null,
+   "price_kg": null,
    "url": "https://www.lidl-hellas.gr/p/kimas-kotopoylo/p11532539"
   },
   {
@@ -3572,14 +3562,14 @@
    "url": "https://www.lidl-hellas.gr/p/agrikia-salami-skordato/p11526358"
   },
   {
-   "title": "ΓΑΛΠΟ Παραδοσιακό ρυζόγαλο",
+   "title": "ΝΩΜΑ Παραδοσιακό ρυζόγαλο",
    "price": 0.51,
    "packaging": "180 g",
    "when": "μόνο στο κατάστημα από 02.11. - 04.11.",
    "loose": false,
    "pack_g": 180.0,
    "price_kg": 2.83,
-   "url": "https://www.lidl-hellas.gr/p/galpo-paradosiako-ryzogalo/p11527734"
+   "url": "https://www.lidl-hellas.gr/p/noma-paradosiako-ryzogalo/p11527734"
   },
   {
    "title": "DULANO Αλλαντικά σε φέτες (Στήθος γαλοπούλας σε φέτες XXL)",
@@ -3683,12 +3673,12 @@
   },
   {
    "title": "Αφρώδης οίνος ροζέ Demi Sec Π.Ο.Π. Αμύνταιο 2024",
-   "price": null,
-   "packaging": "",
+   "price": 6.29,
+   "packaging": "750 ml",
    "when": "μόνο στο κατάστημα 22.10. - 27.10.",
    "loose": false,
-   "pack_g": null,
-   "price_kg": null,
+   "pack_g": 750.0,
+   "price_kg": 8.39,
    "url": "https://www.lidl-hellas.gr/p/afrodis-oinos-roze-demi-sec-p-o-p-amyntaio-2024/p11257718"
   },
   {
